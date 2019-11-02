@@ -120,9 +120,7 @@ class OVREngineConfigurationUpdater
 			return;
 		
 		EnforceBundleId();
-#if !USING_XR_SDK
 		EnforceVRSupport();
-#endif
 		EnforceInstallLocation();
 	}
 

@@ -124,7 +124,6 @@ public class OVROverlayEditor : Editor
 		{
 			overlay.externalSurfaceWidth = EditorGUILayout.IntField("External Surface Width", overlay.externalSurfaceWidth);
 			overlay.externalSurfaceHeight = EditorGUILayout.IntField("External Surface Height", overlay.externalSurfaceHeight);
-			overlay.isProtectedContent = EditorGUILayout.Toggle(new GUIContent("Is Protected Content", "The external surface has L1 widevine protection."), overlay.isProtectedContent);
 		}
 		else
 #endif
@@ -166,7 +165,7 @@ public class OVROverlayEditor : Editor
             overlay.isProtectedContent = EditorGUILayout.Toggle(new GUIContent("Is Protected Content", "The texture has copy protection, e.g., HDCP"), overlay.isProtectedContent);
 #endif
 		}
-		if (overlay.currentOverlayShape == OVROverlay.OverlayShape.Cylinder || overlay.currentOverlayShape == OVROverlay.OverlayShape.Equirect || overlay.currentOverlayShape == OVROverlay.OverlayShape.Quad) {
+		if (overlay.currentOverlayShape == OVROverlay.OverlayShape.Cylinder || overlay.currentOverlayShape == OVROverlay.OverlayShape.Equirect) {
 
 			EditorGUILayout.Separator();
 			EditorGUILayout.Space();

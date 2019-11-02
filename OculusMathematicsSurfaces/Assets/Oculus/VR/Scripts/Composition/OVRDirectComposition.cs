@@ -21,9 +21,8 @@ using System.Collections;
 
 public class OVRDirectComposition : OVRCameraComposition
 {
-	private GameObject previousMainCameraObject = null;
-	public GameObject directCompositionCameraGameObject = null;
-	public Camera directCompositionCamera = null;
+	public GameObject directCompositionCameraGameObject;
+	public Camera directCompositionCamera;
 	public RenderTexture boundaryMeshMaskTexture = null;
 
 	public override OVRManager.CompositionMethod CompositionMethod() { return OVRManager.CompositionMethod.Direct; }
@@ -31,59 +30,38 @@ public class OVRDirectComposition : OVRCameraComposition
 	public OVRDirectComposition(GameObject parentObject, Camera mainCamera, OVRManager.CameraDevice cameraDevice, bool useDynamicLighting, OVRManager.DepthQuality depthQuality)
 		: base(parentObject, mainCamera, cameraDevice, useDynamicLighting, depthQuality)
 	{
-		RefreshCameraObjects(parentObject, mainCamera);
-	}
+		Debug.Assert(directCompositionCameraGameObject == null);
+		directCompositionCameraGameObject = new GameObject();
+		directCompositionCameraGameObject.name = "MRDirectCompositionCamera";
+		directCompositionCameraGameObject.transform.parent = cameraInTrackingSpace ? cameraRig.trackingSpace : parentObject.transform;
+		directCompositionCamera = directCompositionCameraGameObject.AddComponent<Camera>();
+		directCompositionCamera.stereoTargetEye = StereoTargetEyeMask.None;
+		directCompositionCamera.depth = float.MaxValue;
+		directCompositionCamera.rect = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
+		directCompositionCamera.clearFlags = mainCamera.clearFlags;
+		directCompositionCamera.backgroundColor = mainCamera.backgroundColor;
+		directCompositionCamera.cullingMask = mainCamera.cullingMask & (~OVRManager.instance.extraHiddenLayers);
+		directCompositionCamera.nearClipPlane = mainCamera.nearClipPlane;
+		directCompositionCamera.farClipPlane = mainCamera.farClipPlane;
 
-	private void RefreshCameraObjects(GameObject parentObject, Camera mainCamera)
-	{
+
 		if (!hasCameraDeviceOpened)
 		{
-			Debug.LogWarning("[OVRDirectComposition] RefreshCameraObjects(): Unable to open camera device " + cameraDevice);
-			return;
+			Debug.LogError("Unable to open camera device " + cameraDevice);
 		}
-
-		if (mainCamera.gameObject != previousMainCameraObject)
+		else
 		{
-			Debug.LogFormat("[OVRDirectComposition] Camera refreshed. Rebind camera to {0}", mainCamera.gameObject.name);
-
-			OVRCompositionUtil.SafeDestroy(ref directCompositionCameraGameObject);
-			directCompositionCamera = null;
-
-			RefreshCameraRig(parentObject, mainCamera);
-
-			Debug.Assert(directCompositionCameraGameObject == null);
-			directCompositionCameraGameObject = Object.Instantiate(mainCamera.gameObject);
-			directCompositionCameraGameObject.name = "OculusMRC_DirectCompositionCamera";
-			directCompositionCameraGameObject.transform.parent = cameraInTrackingSpace ? cameraRig.trackingSpace : parentObject.transform;
-			if (directCompositionCameraGameObject.GetComponent<AudioListener>())
-			{
-				Object.Destroy(directCompositionCameraGameObject.GetComponent<AudioListener>());
-			}
-			if (directCompositionCameraGameObject.GetComponent<OVRManager>())
-			{
-				Object.Destroy(directCompositionCameraGameObject.GetComponent<OVRManager>());
-			}
-			directCompositionCamera = directCompositionCameraGameObject.GetComponent<Camera>();
-			directCompositionCamera.stereoTargetEye = StereoTargetEyeMask.None;
-			directCompositionCamera.depth = float.MaxValue;
-			directCompositionCamera.rect = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
-			directCompositionCamera.cullingMask = mainCamera.cullingMask & (~OVRManager.instance.extraHiddenLayers);
-
 			Debug.Log("DirectComposition activated : useDynamicLighting " + (useDynamicLighting ? "ON" : "OFF"));
-			RefreshCameraFramePlaneObject(parentObject, directCompositionCamera, useDynamicLighting);
-
-			previousMainCameraObject = mainCamera.gameObject;
+			CreateCameraFramePlaneObject(parentObject, directCompositionCamera, useDynamicLighting);
 		}
 	}
 
-	public override void Update(GameObject gameObject, Camera mainCamera)
+	public override void Update(Camera mainCamera)
 	{
 		if (!hasCameraDeviceOpened)
 		{
 			return;
 		}
-
-		RefreshCameraObjects(gameObject, mainCamera);
 
 		if (!OVRPlugin.SetHandNodePoseStateLatency(OVRManager.instance.handPoseStateLatency))
 		{
@@ -99,9 +77,7 @@ public class OVRDirectComposition : OVRCameraComposition
 		if (OVRMixedReality.useFakeExternalCamera || OVRPlugin.GetExternalCameraCount() == 0)
 		{
 			OVRPose trackingSpacePose = new OVRPose();
-			trackingSpacePose.position = OVRManager.instance.trackingOriginType == OVRManager.TrackingOrigin.EyeLevel ? 
-				OVRMixedReality.fakeCameraEyeLevelPosition : 
-				OVRMixedReality.fakeCameraFloorLevelPosition;
+			trackingSpacePose.position = OVRMixedReality.fakeCameraPositon;
 			trackingSpacePose.orientation = OVRMixedReality.fakeCameraRotation;
 			directCompositionCamera.fieldOfView = OVRMixedReality.fakeCameraFov;
 			directCompositionCamera.aspect = OVRMixedReality.fakeCameraAspect;
@@ -120,10 +96,9 @@ public class OVRDirectComposition : OVRCameraComposition
 		{
 			OVRPlugin.CameraExtrinsics extrinsics;
 			OVRPlugin.CameraIntrinsics intrinsics;
-			OVRPlugin.Posef calibrationRawPose;
 
 			// So far, only support 1 camera for MR and always use camera index 0
-			if (OVRPlugin.GetMixedRealityCameraInfo(0, out extrinsics, out intrinsics, out calibrationRawPose))
+			if (OVRPlugin.GetMixedRealityCameraInfo(0, out extrinsics, out intrinsics))
 			{
 				float fovY = Mathf.Atan(intrinsics.FOVPort.UpTan) * Mathf.Rad2Deg * 2;
 				float aspect = intrinsics.FOVPort.LeftTan / intrinsics.FOVPort.UpTan;
@@ -131,12 +106,12 @@ public class OVRDirectComposition : OVRCameraComposition
 				directCompositionCamera.aspect = aspect;
 				if (cameraInTrackingSpace)
 				{
-					OVRPose trackingSpacePose = ComputeCameraTrackingSpacePose(extrinsics, calibrationRawPose);
+					OVRPose trackingSpacePose = ComputeCameraTrackingSpacePose(extrinsics);
 					directCompositionCamera.transform.FromOVRPose(trackingSpacePose, true);
 				}
 				else
 				{
-					OVRPose worldSpacePose = ComputeCameraWorldSpacePose(extrinsics, calibrationRawPose);
+					OVRPose worldSpacePose = ComputeCameraWorldSpacePose(extrinsics);
 					directCompositionCamera.transform.FromOVRPose(worldSpacePose);
 				}
 			}

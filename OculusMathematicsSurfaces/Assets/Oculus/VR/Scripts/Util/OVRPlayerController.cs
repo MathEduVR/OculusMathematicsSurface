@@ -49,7 +49,7 @@ public class OVRPlayerController : MonoBehaviour
 	/// <summary>
 	/// The rate of rotation when using the keyboard.
 	/// </summary>
-	public float RotationRatchet = 45.0f;
+	public float RotationRatchet = 30.0f;
 
 	/// <summary>
 	/// The player will rotate in fixed steps if Snap Rotation is enabled.
@@ -149,7 +149,6 @@ public class OVRPlayerController : MonoBehaviour
 	private float SimulationRate = 60f;
 	private float buttonRotation = 0f;
 	private bool ReadyToSnapTurn; // Set to true when a snap turn has occurred, code requires one frame of centered thumbstick to enable another snap turn.
-	private bool playerControllerEnabled = false;
 
 	void Start()
 	{
@@ -182,39 +181,26 @@ public class OVRPlayerController : MonoBehaviour
 
 	void OnEnable()
 	{
+		OVRManager.display.RecenteredPose += ResetOrientation;
+
+		if (CameraRig != null)
+		{
+			CameraRig.UpdatedAnchors += UpdateTransform;
+		}
 	}
 
 	void OnDisable()
 	{
-		if (playerControllerEnabled)
-		{
-			OVRManager.display.RecenteredPose -= ResetOrientation;
+		OVRManager.display.RecenteredPose -= ResetOrientation;
 
-			if (CameraRig != null)
-			{
-				CameraRig.UpdatedAnchors -= UpdateTransform;
-			}
-			playerControllerEnabled = false;
+		if (CameraRig != null)
+		{
+			CameraRig.UpdatedAnchors -= UpdateTransform;
 		}
 	}
 
 	void Update()
 	{
-		if (!playerControllerEnabled)
-		{
-			if (OVRManager.OVRManagerinitialized)
-			{
-				OVRManager.display.RecenteredPose += ResetOrientation;
-
-				if (CameraRig != null)
-				{
-					CameraRig.UpdatedAnchors += UpdateTransform;
-				}
-				playerControllerEnabled = true;
-			}
-			else
-				return;
-		}
 		//Use keys to ratchet rotation
 		if (Input.GetKeyDown(KeyCode.Q))
 			buttonRotation -= RotationRatchet;
@@ -381,6 +367,7 @@ public class OVRPlayerController : MonoBehaviour
 #endif
 
 			Vector2 primaryAxis = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
+            if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger)) primaryAxis = Vector2.zero;
 
 			// If speed quantization is enabled, adjust the input to the number of fixed speed steps.
 			if (FixedSpeedSteps > 0)
@@ -435,8 +422,7 @@ public class OVRPlayerController : MonoBehaviour
 
 			if (SnapRotation)
 			{
-				if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickLeft) ||
-					(RotationEitherThumbstick && OVRInput.Get(OVRInput.Button.PrimaryThumbstickLeft)))
+				if ((OVRInput.Get(OVRInput.Button.PrimaryHandTrigger) && OVRInput.Get(OVRInput.Button.PrimaryThumbstickLeft)))
 				{
 					if (ReadyToSnapTurn)
 					{
@@ -444,8 +430,7 @@ public class OVRPlayerController : MonoBehaviour
 						ReadyToSnapTurn = false;
 					}
 				}
-				else if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickRight) ||
-					(RotationEitherThumbstick && OVRInput.Get(OVRInput.Button.PrimaryThumbstickRight)))
+				else if ((OVRInput.Get(OVRInput.Button.PrimaryHandTrigger) && OVRInput.Get(OVRInput.Button.PrimaryThumbstickRight)))
 				{
 					if (ReadyToSnapTurn)
 					{
