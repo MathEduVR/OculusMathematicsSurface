@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 52579803}
   - component: {fileID: 52579802}
   - component: {fileID: 52579801}
+  - component: {fileID: 52579805}
   m_Layer: 0
   m_Name: box_DupinCyclide
   m_TagString: Untagged
@@ -231,6 +232,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 52579799}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &52579805
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52579799}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &113254958
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,6 +261,7 @@ GameObject:
   - component: {fileID: 113254962}
   - component: {fileID: 113254961}
   - component: {fileID: 113254960}
+  - component: {fileID: 113254964}
   m_Layer: 0
   m_Name: box_DupinCyclide
   m_TagString: Untagged
@@ -342,6 +360,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 113254958}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &113254964
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113254958}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &133426460
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,6 +389,7 @@ GameObject:
   - component: {fileID: 133426464}
   - component: {fileID: 133426463}
   - component: {fileID: 133426462}
+  - component: {fileID: 133426466}
   m_Layer: 0
   m_Name: box_SeifertSurface
   m_TagString: Untagged
@@ -453,6 +488,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 133426460}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &133426466
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 133426460}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &186114236
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,7 +516,6 @@ GameObject:
   - component: {fileID: 186114241}
   - component: {fileID: 186114240}
   - component: {fileID: 186114239}
-  - component: {fileID: 186114238}
   m_Layer: 0
   m_Name: box_SeifertSurface
   m_TagString: Untagged
@@ -487,23 +537,6 @@ Transform:
   m_Father: {fileID: 1316910142}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &186114238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 186114236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 1
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints: []
 --- !u!23 &186114239
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -673,7 +706,6 @@ GameObject:
   - component: {fileID: 334853287}
   - component: {fileID: 334853286}
   - component: {fileID: 334853285}
-  - component: {fileID: 334853284}
   m_Layer: 0
   m_Name: box_DupinCyclide
   m_TagString: Untagged
@@ -696,23 +728,6 @@ Transform:
   m_Father: {fileID: 778759483}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &334853284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 334853282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 1
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints: []
 --- !u!23 &334853285
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -878,7 +893,6 @@ GameObject:
   - component: {fileID: 355785002}
   - component: {fileID: 355785001}
   - component: {fileID: 355785000}
-  - component: {fileID: 355784999}
   m_Layer: 0
   m_Name: box_DupinCyclide
   m_TagString: Untagged
@@ -900,23 +914,6 @@ Transform:
   m_Father: {fileID: 1316910142}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &355784999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 355784997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 1
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints: []
 --- !u!23 &355785000
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1528,7 +1525,6 @@ GameObject:
   - component: {fileID: 674901988}
   - component: {fileID: 674901987}
   - component: {fileID: 674901986}
-  - component: {fileID: 674901985}
   m_Layer: 0
   m_Name: box_ClebschSurface1
   m_TagString: Untagged
@@ -1550,23 +1546,6 @@ Transform:
   m_Father: {fileID: 1316910142}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &674901985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 674901983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 1
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints: []
 --- !u!23 &674901986
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1830,7 +1809,6 @@ GameObject:
   - component: {fileID: 747318405}
   - component: {fileID: 747318404}
   - component: {fileID: 747318403}
-  - component: {fileID: 747318402}
   m_Layer: 0
   m_Name: box_DupinCyclide
   m_TagString: Untagged
@@ -1853,23 +1831,6 @@ Transform:
   m_Father: {fileID: 1338832561}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &747318402
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 747318400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 1
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints: []
 --- !u!23 &747318403
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1941,7 +1902,6 @@ GameObject:
   - component: {fileID: 761989834}
   - component: {fileID: 761989833}
   - component: {fileID: 761989832}
-  - component: {fileID: 761989831}
   m_Layer: 0
   m_Name: box_ClebschSurface1
   m_TagString: Untagged
@@ -1963,23 +1923,6 @@ Transform:
   m_Father: {fileID: 764857289}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &761989831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 761989829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 1
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints: []
 --- !u!23 &761989832
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2433,7 +2376,6 @@ GameObject:
   - component: {fileID: 877594963}
   - component: {fileID: 877594962}
   - component: {fileID: 877594961}
-  - component: {fileID: 877594960}
   m_Layer: 0
   m_Name: box_Moebius
   m_TagString: Untagged
@@ -2455,23 +2397,6 @@ Transform:
   m_Father: {fileID: 1316910142}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &877594960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 877594958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 1
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints: []
 --- !u!23 &877594961
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2637,7 +2562,6 @@ GameObject:
   - component: {fileID: 990563441}
   - component: {fileID: 990563440}
   - component: {fileID: 990563439}
-  - component: {fileID: 990563438}
   m_Layer: 0
   m_Name: box_ClebschSurface1
   m_TagString: Untagged
@@ -2660,23 +2584,6 @@ Transform:
   m_Father: {fileID: 778759483}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &990563438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 990563436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 1
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints: []
 --- !u!23 &990563439
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2842,7 +2749,6 @@ GameObject:
   - component: {fileID: 1064694379}
   - component: {fileID: 1064694378}
   - component: {fileID: 1064694377}
-  - component: {fileID: 1064694376}
   m_Layer: 0
   m_Name: box_ClebschSurface1
   m_TagString: Untagged
@@ -2865,23 +2771,6 @@ Transform:
   m_Father: {fileID: 1653757484}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1064694376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1064694374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 1
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints: []
 --- !u!23 &1064694377
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3237,7 +3126,6 @@ GameObject:
   - component: {fileID: 1180551630}
   - component: {fileID: 1180551629}
   - component: {fileID: 1180551628}
-  - component: {fileID: 1180551627}
   m_Layer: 0
   m_Name: box_Moebius
   m_TagString: Untagged
@@ -3260,23 +3148,6 @@ Transform:
   m_Father: {fileID: 1653757484}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1180551627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1180551625}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 1
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints: []
 --- !u!23 &1180551628
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3441,6 +3312,7 @@ GameObject:
   - component: {fileID: 1189693947}
   - component: {fileID: 1189693946}
   - component: {fileID: 1189693945}
+  - component: {fileID: 1189693949}
   m_Layer: 0
   m_Name: box_Moebius
   m_TagString: Untagged
@@ -3539,6 +3411,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1189693943}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &1189693949
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189693943}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1246352537
 GameObject:
   m_ObjectHideFlags: 0
@@ -4235,6 +4123,7 @@ GameObject:
   - component: {fileID: 1351474050}
   - component: {fileID: 1351474049}
   - component: {fileID: 1351474048}
+  - component: {fileID: 1351474047}
   m_Layer: 0
   m_Name: box_Moebius
   m_TagString: Untagged
@@ -4257,6 +4146,22 @@ Transform:
   m_Father: {fileID: 586598703}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1351474047
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351474045}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &1351474048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4345,7 +4250,6 @@ GameObject:
   - component: {fileID: 1355741412}
   - component: {fileID: 1355741411}
   - component: {fileID: 1355741410}
-  - component: {fileID: 1355741409}
   m_Layer: 0
   m_Name: box_ClebschSurface1
   m_TagString: Untagged
@@ -4368,23 +4272,6 @@ Transform:
   m_Father: {fileID: 1338832561}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1355741409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355741407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 1
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints: []
 --- !u!23 &1355741410
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4928,7 +4815,6 @@ GameObject:
   - component: {fileID: 1605934199}
   - component: {fileID: 1605934198}
   - component: {fileID: 1605934197}
-  - component: {fileID: 1605934196}
   m_Layer: 0
   m_Name: box_SeifertSurface
   m_TagString: Untagged
@@ -4950,23 +4836,6 @@ Transform:
   m_Father: {fileID: 764857289}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1605934196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1605934194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 1
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints: []
 --- !u!23 &1605934197
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -5314,6 +5183,7 @@ GameObject:
   - component: {fileID: 1714181973}
   - component: {fileID: 1714181972}
   - component: {fileID: 1714181971}
+  - component: {fileID: 1714181970}
   m_Layer: 0
   m_Name: box_ClebschSurface1
   m_TagString: Untagged
@@ -5336,6 +5206,22 @@ Transform:
   m_Father: {fileID: 586598703}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1714181970
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714181968}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &1714181971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5519,6 +5405,7 @@ GameObject:
   - component: {fileID: 1794038459}
   - component: {fileID: 1794038458}
   - component: {fileID: 1794038457}
+  - component: {fileID: 1794038456}
   m_Layer: 0
   m_Name: box_SeifertSurface
   m_TagString: Untagged
@@ -5541,6 +5428,22 @@ Transform:
   m_Father: {fileID: 586598703}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1794038456
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794038454}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &1794038457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5721,6 +5624,7 @@ GameObject:
   - component: {fileID: 1849350489}
   - component: {fileID: 1849350488}
   - component: {fileID: 1849350487}
+  - component: {fileID: 1849350486}
   m_Layer: 0
   m_Name: box_DupinCyclide
   m_TagString: Untagged
@@ -5743,6 +5647,22 @@ Transform:
   m_Father: {fileID: 586598703}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1849350486
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849350484}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &1849350487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5831,7 +5751,6 @@ GameObject:
   - component: {fileID: 1852216641}
   - component: {fileID: 1852216640}
   - component: {fileID: 1852216639}
-  - component: {fileID: 1852216638}
   m_Layer: 0
   m_Name: box_SeifertSurface
   m_TagString: Untagged
@@ -5854,23 +5773,6 @@ Transform:
   m_Father: {fileID: 1653757484}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1852216638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1852216636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 1
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints: []
 --- !u!23 &1852216639
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6161,7 +6063,6 @@ GameObject:
   - component: {fileID: 1903505074}
   - component: {fileID: 1903505073}
   - component: {fileID: 1903505072}
-  - component: {fileID: 1903505071}
   m_Layer: 0
   m_Name: box_DupinCyclide
   m_TagString: Untagged
@@ -6183,23 +6084,6 @@ Transform:
   m_Father: {fileID: 764857289}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1903505071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1903505069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 1
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints: []
 --- !u!23 &1903505072
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6309,7 +6193,6 @@ GameObject:
   - component: {fileID: 1955016747}
   - component: {fileID: 1955016746}
   - component: {fileID: 1955016745}
-  - component: {fileID: 1955016744}
   m_Layer: 0
   m_Name: box_Moebius
   m_TagString: Untagged
@@ -6331,23 +6214,6 @@ Transform:
   m_Father: {fileID: 764857289}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1955016744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1955016742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d61468f8b77ae4b92c344bc9a600fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_allowOffhandGrab: 1
-  m_snapPosition: 0
-  m_snapOrientation: 0
-  m_snapOffset: {fileID: 0}
-  m_grabPoints: []
 --- !u!23 &1955016745
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6608,6 +6474,7 @@ GameObject:
   - component: {fileID: 2056462515}
   - component: {fileID: 2056462514}
   - component: {fileID: 2056462513}
+  - component: {fileID: 2056462517}
   m_Layer: 0
   m_Name: box_KissSurface
   m_TagString: Untagged
@@ -6706,6 +6573,22 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2056462511}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &2056462517
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2056462511}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2090535308
 GameObject:
   m_ObjectHideFlags: 0
