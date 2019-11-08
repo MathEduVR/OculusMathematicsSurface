@@ -391,7 +391,7 @@ GameObject:
   - component: {fileID: 133426462}
   - component: {fileID: 133426466}
   m_Layer: 0
-  m_Name: box_SeifertSurface
+  m_Name: box_RomanSurface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3561,7 +3561,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1247559237}
-  m_Text: 'Seifert
+  m_Text: 'Roman
 
     Surface'
   m_OffsetZ: 0

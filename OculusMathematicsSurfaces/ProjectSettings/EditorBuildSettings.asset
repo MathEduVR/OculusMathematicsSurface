@@ -41,4 +41,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/KissSurface.unity
     guid: 177c5b9b2d108e741ad344e0dd547840
+  - enabled: 1
+    path: Assets/Scenes/RomanSurface.unity
+    guid: fbfb6a886719bd44c95a2384caa9e583
   m_configObjects: {}

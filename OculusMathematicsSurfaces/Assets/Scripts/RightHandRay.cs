@@ -156,6 +156,10 @@ public class RightHandRay : MonoBehaviour
                 {
                     SceneManager.LoadScene("Scenes/KissSurface");
                 }
+                else if (obj.name.Contains("box_RomanSurface"))
+                {
+                    SceneManager.LoadScene("Scenes/RomanSurface");
+                }
             }
         }
         else
