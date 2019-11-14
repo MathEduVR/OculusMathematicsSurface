@@ -849,7 +849,7 @@ GameObject:
   - component: {fileID: 1591194219}
   - component: {fileID: 1591194218}
   m_Layer: 0
-  m_Name: DupinCyclide
+  m_Name: RomanSurface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -881,6 +881,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8657b349d58e4d149954634a4ff3651d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mesh: {fileID: 0}
+  vertices: []
+  triangles: 
+  constA: 0
 --- !u!54 &1591194219
 Rigidbody:
   m_ObjectHideFlags: 0
