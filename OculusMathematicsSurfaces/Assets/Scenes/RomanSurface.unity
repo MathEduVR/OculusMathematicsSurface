@@ -288,6 +288,18 @@ PrefabInstance:
       propertyPath: useProfileData
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: RotationRatchet
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: RotationEitherThumbstick
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+      propertyPath: EnableRotation
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 400008, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1
@@ -884,6 +896,9 @@ MonoBehaviour:
   mesh: {fileID: 0}
   vertices: []
   triangles: 
+  change: 0
+  CameraRig: {fileID: 1606215638}
+  eyeHeight: {x: 0, y: 1, z: 0}
   constA: 0
 --- !u!54 &1591194219
 Rigidbody:
@@ -910,7 +925,7 @@ MeshCollider:
   m_GameObject: {fileID: 1591194216}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 1
   m_CookingOptions: 14
@@ -961,6 +976,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1591194216}
   m_Mesh: {fileID: 0}
+--- !u!1 &1606215638 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100004, guid: ce816f2e6abb0504092c23ed9b970dfd,
+    type: 3}
+  m_PrefabInstance: {fileID: 462009530}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1766997020
 GameObject:
   m_ObjectHideFlags: 0

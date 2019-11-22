@@ -13,6 +13,8 @@ public class RomanSurface : MonoBehaviour
     public int[] triangles;//三角形のデータ
     public int change;
 
+    public GameObject CameraRig;
+    public Vector3 eyeHeight = Vector3.up;
 
     public float constA;//定数
     // Start is called before the first frame update
@@ -40,10 +42,22 @@ public class RomanSurface : MonoBehaviour
 
     void UpdateButton()
     {
-       if (OVRInput.GetDown(OVRInput.Button.Start))
+        if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickUp) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
+        {
+            eyeHeight.y += 0.02f;
+            CameraRig.transform.localPosition = eyeHeight;
+        }
+        else if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickDown) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
+        {
+            eyeHeight.y -= 0.02f;
+            if (eyeHeight.y < 0.2f) eyeHeight.y = 0.2f;
+            CameraRig.transform.localPosition = eyeHeight;
+        }
+        else if (OVRInput.GetDown(OVRInput.Button.Start))
         {
             SceneManager.LoadScene("Scenes/Main");
-        }else if (OVRInput.GetDown(OVRInput.Button.Two))
+        }
+        else if (OVRInput.GetDown(OVRInput.Button.Two))
         {
             change = 1 - change;
             init_vertices();
