@@ -11,7 +11,7 @@ public class RomanSurface : MonoBehaviour
     int vSize = 80;//vの分割数
     public Vector3[] vertices;//頂点の列
     public int[] triangles;//三角形のデータ
-
+    public int change;
 
 
     public float constA;//定数
@@ -20,7 +20,7 @@ public class RomanSurface : MonoBehaviour
     {
         vertices = new Vector3[(uSize + 1) * (vSize + 1)];//頂点の座標
         triangles = new int[uSize * vSize * 6];//三角形の個数*3の長さの配列
-        constA = 1f;
+        constA = 2.5f;
 
         init_vertices();
         if (mesh == null)
@@ -29,6 +29,7 @@ public class RomanSurface : MonoBehaviour
         }
         init_mesh();
 
+        change = 0;
     }
 
     // Update is called once per frame
@@ -42,6 +43,12 @@ public class RomanSurface : MonoBehaviour
        if (OVRInput.GetDown(OVRInput.Button.Start))
         {
             SceneManager.LoadScene("Scenes/Main");
+        }else if (OVRInput.GetDown(OVRInput.Button.Two))
+        {
+            change = 1 - change;
+            init_vertices();
+            init_mesh();
+
         }
     }
 
@@ -64,8 +71,17 @@ public class RomanSurface : MonoBehaviour
                 triangles[6 * (u * vSize + v) + 1] = (u + 1) * (vSize + 1) + v;
                 triangles[6 * (u * vSize + v) + 2] = u * (vSize + 1) + (v + 1);
                 triangles[6 * (u * vSize + v) + 3] = u * (vSize + 1) + (v + 1);
-                triangles[6 * (u * vSize + v) + 5] = (u + 1) * (vSize + 1) + v;
-                triangles[6 * (u * vSize + v) + 4] = (u + 1) * (vSize + 1) + (v + 1);
+                if (change == 0)
+                {
+                    triangles[6 * (u * vSize + v) + 4] = (u + 1) * (vSize + 1) + v;
+                    triangles[6 * (u * vSize + v) + 5] = (u + 1) * (vSize + 1) + (v + 1);
+                }
+                else
+                {
+                    triangles[6 * (u * vSize + v) + 5] = (u + 1) * (vSize + 1) + v;
+                    triangles[6 * (u * vSize + v) + 4] = (u + 1) * (vSize + 1) + (v + 1);
+
+                }
             }
         }
 
@@ -87,7 +103,7 @@ public class RomanSurface : MonoBehaviour
 
     float surfaceY(float u, float v)
     {
-        return (constA * Mathf.Sin(u) * Mathf.Cos(2*v) );
+        return (constA * Mathf.Sin(u) * Mathf.Sin(2*v) );
     }
 
     float surfaceZ(float u, float v)
