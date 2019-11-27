@@ -34,3 +34,10 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Tex
+*.dvi
+*.aux
+*.synctex.gz
+*Description.log
+*Controller.log
