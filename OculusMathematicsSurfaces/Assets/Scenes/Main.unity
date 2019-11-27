@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 113254960}
   - component: {fileID: 113254964}
   m_Layer: 0
-  m_Name: box_DupinCyclide
+  m_Name: box_FunctionPlot01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -282,7 +282,7 @@ Transform:
   m_Children:
   - {fileID: 782561261}
   m_Father: {fileID: 1653757484}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &113254960
 MonoBehaviour:
@@ -318,7 +318,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9e3f9daa895c6fa4c96a184730d72c37, type: 2}
+  - {fileID: 2100000, guid: f0ab8993cb71834489dd9bc66a1bf188, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2218,9 +2218,9 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 782561260}
-  m_Text: 'Dupin
+  m_Text: 'Function
 
-    Cyclide'
+    Plot'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -3146,7 +3146,7 @@ Transform:
   m_Children:
   - {fileID: 1967828718}
   m_Father: {fileID: 1653757484}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1180551628
 MeshRenderer:
@@ -5052,7 +5052,7 @@ GameObject:
   - component: {fileID: 1653757486}
   - component: {fileID: 1653757485}
   m_Layer: 0
-  m_Name: Wall01 (1)
+  m_Name: Wall05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5069,9 +5069,9 @@ Transform:
   m_LocalPosition: {x: 13, y: 5, z: 6.5}
   m_LocalScale: {x: 12, y: 10, z: 1}
   m_Children:
+  - {fileID: 113254959}
   - {fileID: 1180551626}
   - {fileID: 1852216637}
-  - {fileID: 113254959}
   - {fileID: 1064694375}
   m_Father: {fileID: 1931272649}
   m_RootOrder: 5
@@ -5736,7 +5736,7 @@ Transform:
   m_Children:
   - {fileID: 1325560383}
   m_Father: {fileID: 1653757484}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1852216639
 MeshRenderer:

@@ -160,6 +160,10 @@ public class RightHandRay : MonoBehaviour
                 {
                     SceneManager.LoadScene("Scenes/RomanSurface");
                 }
+                else if (obj.name.Contains("box_FunctionPlot01"))
+                {
+                    SceneManager.LoadScene("Scenes/FunctionPlot01");
+                }
             }
         }
         else

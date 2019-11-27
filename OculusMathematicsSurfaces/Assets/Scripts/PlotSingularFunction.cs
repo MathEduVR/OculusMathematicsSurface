@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class LimitSampleGraph : MonoBehaviour
+public class PlotSingularFunction : MonoBehaviour
 {
     public Vector3[] Vertices;
     public int[] Triangles;
     public int DivR, DivT;
-    public float MaxR, MinR, MaxT, MinT, stepR, stepT;
+    float MaxR, MinR, MaxT, MinT, stepR, stepT;
 
     public Mesh MyMesh;
     public bool GraphA;
 
     public int GraphNumber;
+
+    public GameObject CameraRig;
+    public Vector3 eyeHeight = Vector3.up;
+
 
     void Start()
     {
@@ -25,13 +30,13 @@ public class LimitSampleGraph : MonoBehaviour
         stepR = MaxR / DivR;
         stepT = MaxT / DivT;
         MyMesh = new Mesh();
-        switch (MuseumPlayer.ContentNumber)
-        {
-            case 27: GraphNumber = 0; break;
-            case 28: GraphNumber = 1; break;
-            default: GraphNumber = 2; break;
+        //switch (MuseumPlayer.ContentNumber)
+        //{
+        //    case 27: GraphNumber = 0; break;
+        //    case 28: GraphNumber = 1; break;
+        //    default: GraphNumber = 2; break;
 
-        }
+        //}
         MakeMeshData();
 
     }
@@ -39,7 +44,21 @@ public class LimitSampleGraph : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickUp) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
+        {
+            eyeHeight.y += 0.02f;
+            CameraRig.transform.localPosition = eyeHeight;
+        }
+        else if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickDown) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
+        {
+            eyeHeight.y -= 0.02f;
+            if (eyeHeight.y < 0.2f) eyeHeight.y = 0.2f;
+            CameraRig.transform.localPosition = eyeHeight;
+        }
+        else if (OVRInput.GetDown(OVRInput.Button.Start))
+        {
+            SceneManager.LoadScene("Scenes/Main");
+        }
     }
 
     void MakeMeshData()
