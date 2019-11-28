@@ -367,7 +367,7 @@ public class OVRPlayerController : MonoBehaviour
 #endif
 
 			Vector2 primaryAxis = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
-            if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger)) primaryAxis = Vector2.zero;
+            if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger) || OVRInput.Get(OVRInput.Button.SecondaryHandTrigger)) primaryAxis = Vector2.zero;
 
 			// If speed quantization is enabled, adjust the input to the number of fixed speed steps.
 			if (FixedSpeedSteps > 0)
