@@ -120,6 +120,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &108731429 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100004, guid: ce816f2e6abb0504092c23ed9b970dfd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1912725441}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &164203186
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -850,7 +856,7 @@ MonoBehaviour:
   vertices: []
   triangles: 
   change: 0
-  CameraRig: {fileID: 0}
+  CameraRig: {fileID: 108731429}
   eyeHeight: {x: 0, y: 1, z: 0}
   constA: 0
   alpha: 0
