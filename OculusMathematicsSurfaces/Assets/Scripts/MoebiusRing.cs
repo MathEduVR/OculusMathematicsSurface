@@ -36,20 +36,20 @@ public class MoebiusRing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickDown))
-        {
-            eyeHeight.y -= 0.01f;
-            if (eyeHeight.y < 0.2)
-            {
-                eyeHeight.y = 0.2f;
-            }
-            CameraRig.transform.localPosition = eyeHeight;
-        }
-        else if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickUp))
-        {
-            eyeHeight.y += 0.01f;
-            CameraRig.transform.localPosition = eyeHeight;
-        }
+        //if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickDown))
+        //{
+        //    eyeHeight.y -= 0.01f;
+        //    if (eyeHeight.y < 0.2)
+        //    {
+        //        eyeHeight.y = 0.2f;
+        //    }
+        //    CameraRig.transform.localPosition = eyeHeight;
+        //}
+        //else if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickUp))
+        //{
+        //    eyeHeight.y += 0.01f;
+        //    CameraRig.transform.localPosition = eyeHeight;
+        //}
         if (OVRInput.GetDown(OVRInput.Button.One))
         {
             GetComponent<Rigidbody>().useGravity = true;

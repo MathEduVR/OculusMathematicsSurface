@@ -86,18 +86,19 @@ public class SeifertSurface : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickUp))
-        {
-            eyeHeight.y += 0.02f;
-            CameraRig.transform.localPosition = eyeHeight;
-        }
-        else if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickDown))
-        {
-            eyeHeight.y -= 0.02f;
-            if (eyeHeight.y < 0.2f) eyeHeight.y = 0.2f;
-            CameraRig.transform.localPosition = eyeHeight;
-        }
-        else if (OVRInput.GetDown(OVRInput.Button.Start))
+        //if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickUp))
+        //{
+        //    eyeHeight.y += 0.02f;
+        //    CameraRig.transform.localPosition = eyeHeight;
+        //}
+        //else if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickDown))
+        //{
+        //    eyeHeight.y -= 0.02f;
+        //    if (eyeHeight.y < 0.2f) eyeHeight.y = 0.2f;
+        //    CameraRig.transform.localPosition = eyeHeight;
+        //}
+        //else 
+        if (OVRInput.GetDown(OVRInput.Button.Start))
         {
             SceneManager.LoadScene("Scenes/Main");
         }

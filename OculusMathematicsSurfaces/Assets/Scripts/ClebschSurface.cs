@@ -312,21 +312,22 @@ public class ClebschSurface : MonoBehaviour
     void Update()
     {
         int NumberOfLines = 27;
-        if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickDown))
-        {
-            eyeHeight.y -= 0.01f;
-            if (eyeHeight.y < -1f)
-            {
-                eyeHeight.y = -1f;
-            }
-            CameraRig.transform.localPosition = eyeHeight;
-        }
-        else if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickUp))
-        {
-            eyeHeight.y += 0.01f;
-            CameraRig.transform.localPosition = eyeHeight;
-        }
-        else if (OVRInput.GetDown(OVRInput.Button.Two))
+        //if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickDown))
+        //{
+        //    eyeHeight.y -= 0.01f;
+        //    if (eyeHeight.y < -1f)
+        //    {
+        //        eyeHeight.y = -1f;
+        //    }
+        //    CameraRig.transform.localPosition = eyeHeight;
+        //}
+        //else if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickUp))
+        //{
+        //    eyeHeight.y += 0.01f;
+        //    CameraRig.transform.localPosition = eyeHeight;
+        //}
+        //else 
+        if (OVRInput.GetDown(OVRInput.Button.Two))
         {
             LineNumber = (LineNumber + NumberOfLines - 1) % NumberOfLines;
         }

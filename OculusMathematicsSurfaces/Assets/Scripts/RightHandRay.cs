@@ -87,20 +87,20 @@ public class RightHandRay : MonoBehaviour
             transform.position = Vector3.down; //RayStart + RayCtrl ;
             col = null;
         }
-        if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickDown) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
-        {
-            eyeHeight.y -= 0.01f;
-            if (eyeHeight.y < 0.2)
-            {
-                eyeHeight.y = 0.2f;
-            }
-            CameraRig.transform.localPosition = eyeHeight;
-        }
-        else if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickUp) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
-        {
-            eyeHeight.y += 0.01f;
-            CameraRig.transform.localPosition = eyeHeight;
-        }
+        //if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickDown) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
+        //{
+        //    eyeHeight.y -= 0.01f;
+        //    if (eyeHeight.y < 0.2)
+        //    {
+        //        eyeHeight.y = 0.2f;
+        //    }
+        //    CameraRig.transform.localPosition = eyeHeight;
+        //}
+        //else if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickUp) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
+        //{
+        //    eyeHeight.y += 0.01f;
+        //    CameraRig.transform.localPosition = eyeHeight;
+        //}
     }
     public void UpdateRayRoutine()
     {

@@ -58,18 +58,19 @@ public class DupinCyclide : MonoBehaviour
 
     void UpdateButton()
     {
-        if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickUp) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
-        {
-            eyeHeight.y += 0.02f;
-            CameraRig.transform.localPosition = eyeHeight;
-        }
-        else if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickDown) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
-        {
-            eyeHeight.y -= 0.02f;
-            if (eyeHeight.y < 0.2f) eyeHeight.y = 0.2f;
-            CameraRig.transform.localPosition = eyeHeight;
-        }
-        else if (OVRInput.Get(OVRInput.Button.One))// rate1 --
+        //if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickUp) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
+        //{
+        //    eyeHeight.y += 0.02f;
+        //    CameraRig.transform.localPosition = eyeHeight;
+        //}
+        //else if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickDown) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
+        //{
+        //    eyeHeight.y -= 0.02f;
+        //    if (eyeHeight.y < 0.2f) eyeHeight.y = 0.2f;
+        //    CameraRig.transform.localPosition = eyeHeight;
+        //}
+        //else 
+        if (OVRInput.Get(OVRInput.Button.One))// rate1 --
         {
             rate1 -= 0.002f;
             if (rate1 < 0.01f) rate1 = 0.01f;

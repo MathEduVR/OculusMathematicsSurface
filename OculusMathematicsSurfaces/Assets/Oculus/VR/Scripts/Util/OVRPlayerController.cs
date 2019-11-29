@@ -89,12 +89,13 @@ public class OVRPlayerController : MonoBehaviour
 	/// </summary>
 	[NonSerialized]
 	public float CameraHeight;
+    public Vector3 eyeHeight = Vector3.up;
 
-	/// <summary>
-	/// This event is raised after the character controller is moved. This is used by the OVRAvatarLocomotion script to keep the avatar transform synchronized
-	/// with the OVRPlayerController.
-	/// </summary>
-	public event Action<Transform> TransformUpdated;
+    /// <summary>
+    /// This event is raised after the character controller is moved. This is used by the OVRAvatarLocomotion script to keep the avatar transform synchronized
+    /// with the OVRPlayerController.
+    /// </summary>
+    public event Action<Transform> TransformUpdated;
 
 	/// <summary>
 	/// This bool is set to true whenever the player controller has been teleported. It is reset after every frame. Some systems, such as
@@ -244,8 +245,19 @@ public class OVRPlayerController : MonoBehaviour
 		}
 
 		CameraHeight = CameraRig.centerEyeAnchor.localPosition.y;
+        if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickUp) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
+        {
+            eyeHeight.y += 0.02f;
+            CameraRig.transform.localPosition = eyeHeight;
+        }
+        else if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickDown) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
+        {
+            eyeHeight.y -= 0.02f;
+            if (eyeHeight.y < 0.2f) eyeHeight.y = 0.2f;
+            CameraRig.transform.localPosition = eyeHeight;
+        }
 
-		if (CameraUpdated != null)
+        if (CameraUpdated != null)
 		{
 			CameraUpdated();
 		}
