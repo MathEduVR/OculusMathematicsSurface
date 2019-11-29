@@ -305,10 +305,10 @@ public class OVRPlayerController : MonoBehaviour
 
 		if (EnableLinearMovement)
 		{
-			bool moveForward = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
+            bool moveForward = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || OVRInput.Get(OVRInput.Button.SecondaryThumbstickUp) ;
 			bool moveLeft = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
 			bool moveRight = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
-			bool moveBack = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+			bool moveBack = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || OVRInput.Get(OVRInput.Button.SecondaryThumbstickUp);
 
 			bool dpad_move = false;
 
@@ -422,7 +422,7 @@ public class OVRPlayerController : MonoBehaviour
 
 			if (SnapRotation)
 			{
-				if ((OVRInput.Get(OVRInput.Button.PrimaryHandTrigger) && OVRInput.Get(OVRInput.Button.PrimaryThumbstickLeft)))
+				if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickLeft))
 				{
 					if (ReadyToSnapTurn)
 					{
@@ -430,7 +430,7 @@ public class OVRPlayerController : MonoBehaviour
 						ReadyToSnapTurn = false;
 					}
 				}
-				else if ((OVRInput.Get(OVRInput.Button.PrimaryHandTrigger) && OVRInput.Get(OVRInput.Button.PrimaryThumbstickRight)))
+				else if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickRight))
 				{
 					if (ReadyToSnapTurn)
 					{
