@@ -47,4 +47,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FunctionPlot01.unity
     guid: 5a1fb41ed8b9cf74dbda3c916f041843
+  - enabled: 1
+    path: Assets/Scenes/BoySurface.unity
+    guid: e3c30357bfb8b0447b87007108ef0ee8
   m_configObjects: {}

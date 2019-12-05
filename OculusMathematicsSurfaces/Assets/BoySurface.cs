@@ -23,7 +23,7 @@ public class BoySurface : MonoBehaviour
     {
         vertices = new Vector3[(uSize + 1) * (vSize + 1)];//頂点の座標
         triangles = new int[uSize * vSize * 6];//三角形の個数*3の長さの配列
-        constA = 2.5f;
+        constA = 1.7f;
         alpha = 1.0f;
 
         init_vertices();
@@ -67,6 +67,27 @@ public class BoySurface : MonoBehaviour
             init_mesh();
 
         }
+        else if (OVRInput.GetDown(OVRInput.Button.Three))
+        {
+            if (alpha > 0f)
+            {
+                alpha -= 0.1f;
+                init_vertices();
+                init_mesh();
+
+            }
+        }
+        else if (OVRInput.GetDown(OVRInput.Button.Four))
+        {
+            if (alpha <1.0f)
+            {
+                alpha += 0.1f;
+                init_vertices();
+                init_mesh();
+
+            }
+        }
+
     }
 
     void init_vertices()
