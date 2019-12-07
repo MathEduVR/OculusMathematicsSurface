@@ -175,9 +175,14 @@ public class RightHandRay : MonoBehaviour
                     SceneManager.LoadScene("Scenes/BoursMinimal");
                 }
                 //CatalansSurface
-                else if (obj.name.Contains("box_CatalansSurface"))
+                else if (obj.name.Contains("box_CatalansMinimal"))
                 {
-                    SceneManager.LoadScene("Scenes/CatalansSurface");
+                    SceneManager.LoadScene("Scenes/CatalansMinimal");
+                }
+                //FakeGyroid
+                else if (obj.name.Contains("box_FakeGyroid"))
+                {
+                    SceneManager.LoadScene("Scenes/FakeGyroid");
                 }
             }
         }
