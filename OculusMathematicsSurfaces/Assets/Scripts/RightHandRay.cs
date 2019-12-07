@@ -169,6 +169,10 @@ public class RightHandRay : MonoBehaviour
                 {
                     SceneManager.LoadScene("Scenes/FunctionPlot02");
                 }
+                else if (obj.name.Contains("box_SaddlePoint"))
+                {
+                    SceneManager.LoadScene("Scenes/SaddlePoint");
+                }
                 //room 3
                 else if (obj.name.Contains("box_BoursMinimal"))
                 {

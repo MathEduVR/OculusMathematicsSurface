@@ -22,6 +22,7 @@ public class PlotSingularFunction : MonoBehaviour
     void Start()
     {
         MaxR = 3f;
+        if (GraphNumber == 3) MaxR = 1.5f;
         MinR = 0f;
         MaxT = Mathf.PI * 2f;
         MinT = 0f;
@@ -30,13 +31,6 @@ public class PlotSingularFunction : MonoBehaviour
         stepR = MaxR / DivR;
         stepT = MaxT / DivT;
         MyMesh = new Mesh();
-        //switch (MuseumPlayer.ContentNumber)
-        //{
-        //    case 27: GraphNumber = 0; break;
-        //    case 28: GraphNumber = 1; break;
-        //    default: GraphNumber = 2; break;
-
-        //}
         MakeMeshData();
 
     }
@@ -44,18 +38,6 @@ public class PlotSingularFunction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickUp) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
-        //{
-        //    eyeHeight.y += 0.02f;
-        //    CameraRig.transform.localPosition = eyeHeight;
-        //}
-        //else if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickDown) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
-        //{
-        //    eyeHeight.y -= 0.02f;
-        //    if (eyeHeight.y < 0.2f) eyeHeight.y = 0.2f;
-        //    CameraRig.transform.localPosition = eyeHeight;
-        //}
-        //else 
         if (OVRInput.GetDown(OVRInput.Button.Start))
         {
             SceneManager.LoadScene("Scenes/Main");
@@ -143,6 +125,8 @@ public class PlotSingularFunction : MonoBehaviour
                     return Mathf.Abs(xx) * yy;
                 }
                 return (Mathf.Abs(x) * y) / (x * x + y * y);
+            case 3:
+                return (x * x * x - x * x + y * y) * 0.5f;
             default:
                 if (x * x + y * y == 0f)
                 {

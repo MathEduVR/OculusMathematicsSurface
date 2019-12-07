@@ -11,24 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MoebiusRing.unity
     guid: 041f44d2da5613043ba194c98444791b
-  - enabled: 0
-    path: 
-    guid: 10956495d8e5ce1479856edcf4fc4c48
-  - enabled: 0
-    path: 
-    guid: 0a154db5e71c1ec4fa7e2cb57ae547dd
-  - enabled: 0
-    path: 
-    guid: 11c70fa8223882b4b8aa330dd00b1e2f
   - enabled: 1
     path: Assets/Scenes/DupinCyclide.unity
     guid: d9283d616759c1744a6db5f14a09682a
-  - enabled: 0
-    path: 
-    guid: 4010343f431b7ba409715430a9bc05fb
-  - enabled: 0
-    path: 
-    guid: 33edf0786a661a44f8a849eefc57c485
   - enabled: 1
     path: Assets/Scenes/ClebschSurface1.unity
     guid: de6d636bf174c4f4a80a7b3d8bfd7878
@@ -45,15 +30,24 @@ EditorBuildSettings:
     path: Assets/Scenes/RomanSurface.unity
     guid: fbfb6a886719bd44c95a2384caa9e583
   - enabled: 1
+    path: Assets/Scenes/BoySurface.unity
+    guid: e3c30357bfb8b0447b87007108ef0ee8
+  - enabled: 1
     path: Assets/Scenes/FunctionPlot01.unity
     guid: 5a1fb41ed8b9cf74dbda3c916f041843
   - enabled: 1
-    path: Assets/Scenes/BoySurface.unity
-    guid: e3c30357bfb8b0447b87007108ef0ee8
+    path: Assets/Scenes/FunctionPlot02.unity
+    guid: 310530a31cb0e244c987061d231877a9
   - enabled: 1
     path: Assets/Scenes/BoursMinimal.unity
     guid: 5ed0f55f696be7147867aee383d1bfd8
   - enabled: 1
     path: Assets/Scenes/CatalansMinimal.unity
     guid: f41ae585bb311dd4c8498f8d3ad0553c
+  - enabled: 1
+    path: Assets/Scenes/FakeGyroid.unity
+    guid: 9cec09480d9229245b902def609b1e29
+  - enabled: 1
+    path: Assets/Scenes/SaddlePoint.unity
+    guid: 4665cab38b6ca0e4ca575c847faec6da
   m_configObjects: {}
