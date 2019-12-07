@@ -119,9 +119,9 @@ public class RightHandRay : MonoBehaviour
         }
         if (col != null && col.name.Contains("box_"))
         {
-            if(allCaptions!=null)
+            if (allCaptions != null)
                 for (int i = 0; i < allCaptions.Length; i++)
-                    allCaptions[i].gameObject.transform.localPosition = new Vector3(0f, -10f, 0f);
+                    allCaptions[i].gameObject.transform.localPosition = new Vector3(100f, 100f, 100f);
             GameObject obj = col.gameObject;
             TextMesh childText = obj.GetComponentInChildren<TextMesh>();
             //Debug.Log(childText);
@@ -160,15 +160,25 @@ public class RightHandRay : MonoBehaviour
                 {
                     SceneManager.LoadScene("Scenes/RomanSurface");
                 }
-                else if (obj.name.Contains("box_FunctionPlot01"))
-                {
-                    SceneManager.LoadScene("Scenes/FunctionPlot01");
-                }
                 else if (obj.name.Contains("box_BoySurface"))
                 {
                     SceneManager.LoadScene("Scenes/BoySurface");
                 }
-
+                //room 2
+                else if (obj.name.Contains("box_FunctionPlot01"))
+                {
+                    SceneManager.LoadScene("Scenes/FunctionPlot01");
+                }
+                //room 3
+                else if (obj.name.Contains("box_BoursMinimal"))
+                {
+                    SceneManager.LoadScene("Scenes/BoursMinimal");
+                }
+                //CatalansSurface
+                else if (obj.name.Contains("box_CatalansSurface"))
+                {
+                    SceneManager.LoadScene("Scenes/CatalansSurface");
+                }
             }
         }
         else
