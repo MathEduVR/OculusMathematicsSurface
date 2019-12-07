@@ -63,8 +63,8 @@ public class CatalansSurface : MonoBehaviour
             for (int v = 0; v <= vSize; v++)
             {
                 float uu = -2.5f * Mathf.PI + 5f * Mathf.PI * u / (uSize);
-                float vv = -1f + 2f * v / (vSize);
-                vertices[u * (vSize + 1) + v] = new Vector3(surfaceX(uu, vv), surfaceZ(uu, vv), surfaceY(uu, vv));
+                float vv = -2f + 4f * v / (vSize);
+                vertices[u * (vSize + 1) + v] = new Vector3(surfaceX(uu, vv), surfaceZ(uu, vv)+2f, surfaceY(uu, vv));
             }
         }
         for (int u = 0; u < uSize; u++)//三角形の頂点のデータを作っている

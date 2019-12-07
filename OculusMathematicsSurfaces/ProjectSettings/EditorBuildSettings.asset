@@ -50,4 +50,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BoySurface.unity
     guid: e3c30357bfb8b0447b87007108ef0ee8
+  - enabled: 1
+    path: Assets/Scenes/BoursMinimal.unity
+    guid: 5ed0f55f696be7147867aee383d1bfd8
+  - enabled: 1
+    path: Assets/Scenes/CatalansSurface.unity
+    guid: f41ae585bb311dd4c8498f8d3ad0553c
   m_configObjects: {}

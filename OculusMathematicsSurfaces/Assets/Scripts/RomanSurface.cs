@@ -74,16 +74,17 @@ public class RomanSurface : MonoBehaviour
                 triangles[6 * (u * vSize + v) + 0] = u * (vSize + 1) + v;
                 triangles[6 * (u * vSize + v) + 1] = (u + 1) * (vSize + 1) + v;
                 triangles[6 * (u * vSize + v) + 2] = u * (vSize + 1) + (v + 1);
-                triangles[6 * (u * vSize + v) + 3] = u * (vSize + 1) + (v + 1);
                 if (change == 0)
                 {
+                    triangles[6 * (u * vSize + v) + 3] = u * (vSize + 1) + (v + 1);
                     triangles[6 * (u * vSize + v) + 4] = (u + 1) * (vSize + 1) + v;
                     triangles[6 * (u * vSize + v) + 5] = (u + 1) * (vSize + 1) + (v + 1);
                 }
                 else
                 {
-                    triangles[6 * (u * vSize + v) + 5] = (u + 1) * (vSize + 1) + v;
-                    triangles[6 * (u * vSize + v) + 4] = (u + 1) * (vSize + 1) + (v + 1);
+                    triangles[6 * (u * vSize + v) + 3] = 0;
+                    triangles[6 * (u * vSize + v) + 4] = 0;
+                    triangles[6 * (u * vSize + v) + 5] = 0;
 
                 }
             }
