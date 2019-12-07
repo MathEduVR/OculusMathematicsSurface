@@ -25,11 +25,16 @@ public class RightHandRay : MonoBehaviour
 
     TextMesh[] allCaptions;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
         StartRoutine();
         allCaptions = FindObjectsOfType<TextMesh>();
+        if (allCaptions != null)
+            for (int i = 0; i < allCaptions.Length; i++)
+                allCaptions[i].gameObject.transform.localPosition = new Vector3(100f, 100f, 100f);
     }
     // Update is called once per frame
     void Update()
@@ -60,10 +65,10 @@ public class RightHandRay : MonoBehaviour
         }
         CtrlPt = RightHand.transform.rotation * Vector3.forward;
         ray = new Ray();
-        CameraRig.transform.localPosition = eyeHeight;
-        CameraRig.transform.rotation = Quaternion.identity;
-        PlayerController.transform.position = homePosition;
-        PlayerController.transform.rotation = Quaternion.identity;
+        PlayerController.transform.position = Common.ControllerPosition;
+        PlayerController.transform.rotation = Common.ControllerRotation;
+        CameraRig.transform.localPosition = Common.CameraRigPosition;
+        CameraRig.transform.rotation = Common.CameraRigRotation;
     }
 
     public void UpdateRoutine()
@@ -87,20 +92,7 @@ public class RightHandRay : MonoBehaviour
             transform.position = Vector3.down; //RayStart + RayCtrl ;
             col = null;
         }
-        //if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickDown) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
-        //{
-        //    eyeHeight.y -= 0.01f;
-        //    if (eyeHeight.y < 0.2)
-        //    {
-        //        eyeHeight.y = 0.2f;
-        //    }
-        //    CameraRig.transform.localPosition = eyeHeight;
-        //}
-        //else if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickUp) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
-        //{
-        //    eyeHeight.y += 0.01f;
-        //    CameraRig.transform.localPosition = eyeHeight;
-        //}
+ 
     }
     public void UpdateRayRoutine()
     {
@@ -112,10 +104,10 @@ public class RightHandRay : MonoBehaviour
     void UpdateButton()
     {
         if (OVRInput.GetDown(OVRInput.Button.Start)){
-            CameraRig.transform.localPosition = eyeHeight;
-            CameraRig.transform.rotation = Quaternion.identity;
-            PlayerController.transform.position = homePosition;
-            PlayerController.transform.rotation = Quaternion.identity;
+            CameraRig.transform.localPosition = Common.CameraRigPosition;
+            CameraRig.transform.rotation = Common.CameraRigRotation;
+            PlayerController.transform.position = Common.ControllerPosition;
+            PlayerController.transform.rotation = Common.ControllerRotation;
         }
         if (col != null && col.name.Contains("box_"))
         {
@@ -134,6 +126,10 @@ public class RightHandRay : MonoBehaviour
                 || OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger) 
                 || OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger))
             {
+                Common.ControllerPosition = PlayerController.transform.position;
+                Common.ControllerRotation = PlayerController.transform.rotation;
+                Common.CameraRigPosition = CameraRig.transform.localPosition;
+                Common.CameraRigRotation = CameraRig.transform.rotation;
                 //GameObject colObj = col.gameObject;
                 Debug.Log(obj.name);
                 if (obj.name.Contains("box_Moebius"))
@@ -168,6 +164,10 @@ public class RightHandRay : MonoBehaviour
                 else if (obj.name.Contains("box_FunctionPlot01"))
                 {
                     SceneManager.LoadScene("Scenes/FunctionPlot01");
+                }
+                else if (obj.name.Contains("box_FunctionPlot02"))
+                {
+                    SceneManager.LoadScene("Scenes/FunctionPlot02");
                 }
                 //room 3
                 else if (obj.name.Contains("box_BoursMinimal"))

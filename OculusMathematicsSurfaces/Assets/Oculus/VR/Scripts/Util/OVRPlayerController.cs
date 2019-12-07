@@ -245,12 +245,12 @@ public class OVRPlayerController : MonoBehaviour
 		}
 
 		CameraHeight = CameraRig.centerEyeAnchor.localPosition.y;
-        if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickUp) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
+        if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickUp) && OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger))
         {
             eyeHeight.y += 0.02f;
             CameraRig.transform.localPosition = eyeHeight;
         }
-        else if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickDown) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
+        else if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickDown) && OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger))
         {
             eyeHeight.y -= 0.02f;
             if (eyeHeight.y < 0.2f) eyeHeight.y = 0.2f;
@@ -379,7 +379,8 @@ public class OVRPlayerController : MonoBehaviour
 #endif
 
 			Vector2 primaryAxis = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
-            if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger) || OVRInput.Get(OVRInput.Button.SecondaryHandTrigger)) primaryAxis = Vector2.zero;
+            if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger) || OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger))
+                primaryAxis = Vector2.zero;
 
 			// If speed quantization is enabled, adjust the input to the number of fixed speed steps.
 			if (FixedSpeedSteps > 0)
