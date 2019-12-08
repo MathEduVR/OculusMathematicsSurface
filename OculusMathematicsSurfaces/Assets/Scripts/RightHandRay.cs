@@ -187,6 +187,11 @@ public class RightHandRay : MonoBehaviour
                 {
                     SceneManager.LoadScene("Scenes/FakeGyroid");
                 }
+                //Helicoid
+                else if (obj.name.Contains("box_Helicoid"))
+                {
+                    SceneManager.LoadScene("Scenes/Helicoid");
+                }
             }
         }
         else

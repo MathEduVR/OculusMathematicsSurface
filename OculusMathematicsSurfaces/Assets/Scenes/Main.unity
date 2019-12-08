@@ -2061,7 +2061,7 @@ GameObject:
   - component: {fileID: 512668790}
   - component: {fileID: 512668789}
   m_Layer: 0
-  m_Name: box_BoursMinimal
+  m_Name: box_DiniSurface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2187,7 +2187,7 @@ GameObject:
   - component: {fileID: 532914548}
   - component: {fileID: 532914547}
   m_Layer: 0
-  m_Name: box_CatalansMinimal
+  m_Name: box_KuenSurface
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3083,7 +3083,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 681840958}
-  m_Text: Tractircoid
+  m_Text: Tractricoid
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -5139,7 +5139,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 584662273d60a0f47bd7fecbb570e66e, type: 2}
+  - {fileID: 2100000, guid: ae8e11b930eacb7458135680895d857d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5780,7 +5780,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1153073489}
-  m_Text: Catenoid
+  m_Text: xxx
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -7573,7 +7573,7 @@ GameObject:
   - component: {fileID: 1351298801}
   - component: {fileID: 1351298800}
   m_Layer: 0
-  m_Name: box_Helicoid
+  m_Name: box_Tractrioid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9628,7 +9628,9 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1672052830}
-  m_Text: xxx
+  m_Text: 'xxx
+
+'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -10567,7 +10569,11 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1803614807}
-  m_Text: Helicoid
+  m_Text: 'Catenoid,
+
+    Helicoid
+
+'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -11498,7 +11504,7 @@ GameObject:
   - component: {fileID: 1931276140}
   - component: {fileID: 1931276139}
   m_Layer: 0
-  m_Name: box_Catenoid
+  m_Name: box_xxx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -50,4 +50,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SaddlePoint.unity
     guid: 4665cab38b6ca0e4ca575c847faec6da
+  - enabled: 1
+    path: Assets/Scenes/Helicoid.unity
+    guid: 77036271901c5df419f566ae011e3f61
   m_configObjects: {}
