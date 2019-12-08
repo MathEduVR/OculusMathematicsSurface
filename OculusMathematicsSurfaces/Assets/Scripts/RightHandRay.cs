@@ -123,7 +123,6 @@ public class RightHandRay : MonoBehaviour
             }
             GetComponent<MeshRenderer>().material = CursorOnMaterial;
             if (OVRInput.Get(OVRInput.Button.One) 
-                || OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger) 
                 || OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger))
             {
                 Common.ControllerPosition = PlayerController.transform.position;

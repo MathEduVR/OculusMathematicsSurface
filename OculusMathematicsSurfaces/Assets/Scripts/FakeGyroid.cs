@@ -19,12 +19,10 @@ public class FakeGyroid : MonoBehaviour
     Mesh mesh;
     public Material SurfaceMaterial;
 
-    public GameObject CameraRig;
-    public Vector3 eyeHeight;
+//    public GameObject CameraRig;
 
-    public GameObject Line;
-    public int LineNumber;
 
+    public float minX = -1f, maxX = 1f, minY = -1f, maxY = 1f, minZ = -1f, maxZ = 1f; 
 
     float InnerDivision(float x1, float x2, float rate1, float rate2)
     {
@@ -36,33 +34,34 @@ public class FakeGyroid : MonoBehaviour
     void Start()
     {
 
-        GameObject[] objs = FindObjectsOfType<GameObject>();
-        for (int i = 0; i < objs.Length; i++)
-        {
-            if (objs[i].name.Contains("OVRCameraRig"))
-            {
-                CameraRig = objs[i];
-            }
-        }
-        CameraRig.transform.localPosition = eyeHeight;
+        //GameObject[] objs = FindObjectsOfType<GameObject>();
+        //for (int i = 0; i < objs.Length; i++)
+        //{
+        //    if (objs[i].name.Contains("OVRCameraRig"))
+        //    {
+        //        CameraRig = objs[i];
+        //    }
+        //}
+        //CameraRig.transform.localPosition = eyeHeight;
 
-        float border = 2f;
-        float step = border * 0.05f;
+        float stepX = (maxX - minX) * 0.05f;
+        float stepY = (maxY - minY) * 0.05f;
+        float stepZ = (maxZ - minZ) * 0.05f;
         vertices = new List<Vector3>();
         triangles = new List<int>();
 
 
         mesh = new Mesh();
 
-        for (float x0 = -border; x0 <= border; x0 += step)
+        for (float x0 = minX; x0 <= maxX; x0 += stepX)
         {
-            float x1 = x0 + step;
-            for (float y0 = -border; y0 <= border; y0 += step)
+            float x1 = x0 + stepX;
+            for (float y0 = minY; y0 <= maxY; y0 += stepY)
             {
-                float y1 = y0 + step;
-                for (float z0 = -border; z0 <= border; z0 += step)
+                float y1 = y0 + stepY;
+                for (float z0 = minZ; z0 <= maxZ; z0 += stepZ)
                 {
-                    float z1 = z0 + step;
+                    float z1 = z0 + stepZ;
                     float f000 = F(x0, y0, z0);
                     float f001 = F(x0, y0, z1);
                     float f010 = F(x0, y1, z0);
@@ -234,7 +233,6 @@ public class FakeGyroid : MonoBehaviour
         mesh.RecalculateNormals();
         GetComponent<MeshFilter>().mesh = mesh;
         GetComponent<MeshRenderer>().material = SurfaceMaterial;
-        LineNumber = 0;
 
     }
 
