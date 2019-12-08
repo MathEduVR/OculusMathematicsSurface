@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Helicoid : MonoBehaviour
+public class KuenSurface : MonoBehaviour
 {
     public Mesh mesh = null;
-    int uSize = 80;//uの分割数
-    int vSize = 80;//vの分割数
+    int uSize = 40;//uの分割数
+    int vSize = 160;//vの分割数
     public Vector3[] vertices;//頂点の列
     public int[] triangles;//三角形のデータ
     public int change;
     public bool sideA;
-    //public GameObject CameraRig;
-    //public Vector3 eyeHeight = Vector3.up;
 
     public float constA;//定数
-    public float alpha;// 0 - pi/2
     // Start is called before the first frame update
     void Start()
     {
@@ -54,27 +51,6 @@ public class Helicoid : MonoBehaviour
             init_mesh();
 
         }
-        else if (OVRInput.GetDown(OVRInput.Button.Three))
-        {
-            alpha -= 0.1f;
-            if (alpha < 0f)
-            {
-                alpha = 0f;
-            }
-            init_vertices();
-            init_mesh();
-        }
-        else if (OVRInput.GetDown(OVRInput.Button.Four))
-        {
-            alpha += 0.1f;
-            if (alpha > Mathf.PI/2f)
-            {
-                alpha = Mathf.PI / 2f;
-            }
-            init_vertices();
-            init_mesh();
-        }
-
     }
 
     void init_vertices()
@@ -83,8 +59,8 @@ public class Helicoid : MonoBehaviour
         {
             for (int v = 0; v <= vSize; v++)
             {
-                float uu = -Mathf.PI / 2f + 2f * Mathf.PI * u / (uSize);
-                float vv = -2f + 4f * v / (vSize);
+                float uu = (2f * Mathf.PI) * u / (uSize);
+                float vv = 0.01f + (Mathf.PI - 0.02f) * v / (vSize);
                 vertices[u * (vSize + 1) + v] = new Vector3(surfaceX(uu, vv), surfaceY(uu, vv), surfaceZ(uu, vv));
             }
         }
@@ -92,7 +68,8 @@ public class Helicoid : MonoBehaviour
         {
             for (int v = 0; v < vSize; v++)
             {
-                if (sideA) {
+                if (sideA)
+                {
                     triangles[6 * (u * vSize + v) + 0] = u * (vSize + 1) + v;
                     triangles[6 * (u * vSize + v) + 1] = (u + 1) * (vSize + 1) + v;
                     triangles[6 * (u * vSize + v) + 2] = u * (vSize + 1) + (v + 1);
@@ -143,29 +120,21 @@ public class Helicoid : MonoBehaviour
         GetComponent<MeshCollider>().sharedMesh = mesh;
     }
 
-    readonly float E = 2.718281828459f;
-    float Cosh(float x)
-    {
-        return (Mathf.Pow(E, x) + Mathf.Pow(E, -x)) * 0.5f;
-    }
-    float Sinh(float x)
-    {
-        return (Mathf.Pow(E, x) - Mathf.Pow(E, -x)) * 0.5f;
-    }
+
 
 
     float surfaceX(float u, float v)
     {
-        return constA * (Mathf.Cos(alpha) * Sinh(v) * Mathf.Sin(u) + Mathf.Sin(alpha) * Cosh(v) * Mathf.Cos(u));
+        return constA * (2f * (Mathf.Cos(u) + u * Mathf.Sin(u)) * Mathf.Sin(v))/(1 + u * u * Mathf.Sin(v) * Mathf.Sin(v));
     }
 
     float surfaceY(float u, float v)
     {
-        return (constA * (u * Mathf.Cos(alpha) + v * Mathf.Sin(alpha)));
+        return constA * (Mathf.Log(Mathf.Tan(v * 0.5f))+(2f * Mathf.Cos(v))/(1 + u * u * Mathf.Sin(v) * Mathf.Sin(v)));
     }
 
     float surfaceZ(float u, float v)
     {
-        return (constA * (-Mathf.Cos(alpha) * Sinh(v) * Mathf.Cos(u) + Mathf.Sin(alpha) * Cosh(v) * Mathf.Sin(u)));
+        return constA * (2f * (Mathf.Sin(u) - u * Mathf.Cos(u)) * Mathf.Sin(v)) / (1 + u * u * Mathf.Sin(v) * Mathf.Sin(v));
     }
 }

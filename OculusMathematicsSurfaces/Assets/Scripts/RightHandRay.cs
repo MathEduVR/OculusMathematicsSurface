@@ -192,6 +192,22 @@ public class RightHandRay : MonoBehaviour
                 {
                     SceneManager.LoadScene("Scenes/Helicoid");
                 }
+                //Catenoid
+                else if (obj.name.Contains("box_Catenoid"))
+                {
+                    SceneManager.LoadScene("Scenes/Catenoid");
+                }
+                // room 4
+                // Dini
+                else if (obj.name.Contains("box_DiniSurface"))
+                {
+                    SceneManager.LoadScene("Scenes/DiniSurface");
+                }
+                // Kuen
+                else if (obj.name.Contains("box_KuenSurface"))
+                {
+                    SceneManager.LoadScene("Scenes/KuenSurface");
+                }
             }
         }
         else

@@ -401,9 +401,9 @@ TextMesh:
     Thumbstick RIGHT] Go right  \r\n[Left Thumbstick LEFT] Go left  \r\n[Right Thumbstick
     RIGHT] Turn right  \r\n[Right Thumbstick LEFT] Turn left  \r\n\r\n[Left Index
     Trigger]+[Left Thumbstick UP] Go up  \r\n[Left Index Trigger]+[Left Thumbstick
-    DOWN] Go down \r\n\r\n[Button B] Surface <-> Mesh \r\n\r[Button X] Helicoid ->
-    Catenoid \r\n\r[Button Y] Catenoid -> Helicoid\r\n\r\n[Left Start] Go back to
-    Surface museum"
+    DOWN] Go down \r\n\r\n[Button B] Surface <-> Mesh \r\n\r[Button X] Catenoid ->
+    Helicoid\r\n\r[Button Y] Helicoid -> Catenoid \n\n[Left Start] Go back to Surface
+    museum"
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
