@@ -50,11 +50,12 @@ public class OVRPlayerController : MonoBehaviour
 	/// The rate of rotation when using the keyboard.
 	/// </summary>
 	public float RotationRatchet = 30.0f;
+    float RotationV = 0.0f;
 
-	/// <summary>
-	/// The player will rotate in fixed steps if Snap Rotation is enabled.
-	/// </summary>
-	[Tooltip("The player will rotate in fixed steps if Snap Rotation is enabled.")]
+    /// <summary>
+    /// The player will rotate in fixed steps if Snap Rotation is enabled.
+    /// </summary>
+    [Tooltip("The player will rotate in fixed steps if Snap Rotation is enabled.")]
 	public bool SnapRotation = true;
 
 	/// <summary>
@@ -439,7 +440,9 @@ public class OVRPlayerController : MonoBehaviour
 				{
 					if (ReadyToSnapTurn)
 					{
-                        euler.y -= .3f;
+                        RotationV += .05f;
+                        if (RotationV > 0.3f) RotationV = 0.3f;
+                        euler.y -= RotationV;
                         //euler.y -= RotationRatchet;
 						//ReadyToSnapTurn = false;
 					}
@@ -448,14 +451,18 @@ public class OVRPlayerController : MonoBehaviour
 				{
 					if (ReadyToSnapTurn)
 					{
-						euler.y += .3f;
+                        RotationV += .05f;
+                        if (RotationV > 0.3f) RotationV = 0.3f;
+                        euler.y += RotationV;
                         //euler.y += RotationRatchet;
                         //ReadyToSnapTurn = false;
                     }
                 }
 				else
 				{
-					ReadyToSnapTurn = true;
+                    RotationV -= .03f;
+                    if (RotationV < 0f) RotationV = 0f;
+                    ReadyToSnapTurn = true;
 				}
 			}
 			else
