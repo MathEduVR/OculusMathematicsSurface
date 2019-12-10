@@ -440,9 +440,9 @@ public class OVRPlayerController : MonoBehaviour
 				{
 					if (ReadyToSnapTurn)
 					{
-                        RotationV += .05f;
-                        if (RotationV > 0.3f) RotationV = 0.3f;
-                        euler.y -= RotationV;
+                        RotationV -= .05f;
+                        if (RotationV < -0.3f) RotationV = -0.3f;
+                        euler.y += RotationV;
                         //euler.y -= RotationRatchet;
 						//ReadyToSnapTurn = false;
 					}
@@ -460,8 +460,20 @@ public class OVRPlayerController : MonoBehaviour
                 }
 				else
 				{
-                    RotationV -= .03f;
-                    if (RotationV < 0f) RotationV = 0f;
+                    if (RotationV < -0.02f)
+                    {
+                        RotationV += 0.025f;
+                        euler.y += RotationV;
+                    }
+                    else if (RotationV > 0.02f)
+                    {
+                        RotationV -= 0.025f;
+                        euler.y += RotationV;
+                    }
+                    else
+                    {
+                        RotationV = 0f;
+                    }
                     ReadyToSnapTurn = true;
 				}
 			}
