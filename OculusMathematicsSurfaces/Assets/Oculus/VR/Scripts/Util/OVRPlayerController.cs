@@ -439,18 +439,20 @@ public class OVRPlayerController : MonoBehaviour
 				{
 					if (ReadyToSnapTurn)
 					{
-						euler.y -= RotationRatchet;
-						ReadyToSnapTurn = false;
+                        euler.y -= .3f;
+                        //euler.y -= RotationRatchet;
+						//ReadyToSnapTurn = false;
 					}
 				}
 				else if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickRight))
 				{
 					if (ReadyToSnapTurn)
 					{
-						euler.y += RotationRatchet;
-						ReadyToSnapTurn = false;
-					}
-				}
+						euler.y += .3f;
+                        //euler.y += RotationRatchet;
+                        //ReadyToSnapTurn = false;
+                    }
+                }
 				else
 				{
 					ReadyToSnapTurn = true;
