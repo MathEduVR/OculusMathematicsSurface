@@ -201,6 +201,11 @@ public class RightHandRay : MonoBehaviour
                 {
                     SceneManager.LoadScene("Scenes/Catenoid");
                 }
+                //Costa
+                else if (obj.name.Contains("box_CostaMinimal"))
+                {
+                    SceneManager.LoadScene("Scenes/CostaMinimalSurface");
+                }
                 // room 4
                 // Dini
                 else if (obj.name.Contains("box_DiniSurface"))
