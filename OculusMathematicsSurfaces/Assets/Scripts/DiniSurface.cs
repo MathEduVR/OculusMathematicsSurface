@@ -22,12 +22,12 @@ public class DiniSurface : MonoBehaviour
         triangles = new int[uSize * vSize * 6];//三角形の個数*3の長さの配列
         constA = 1.1f;
 
-        init_vertices();
+        InitVertices();
         if (mesh == null)
         {
             mesh = new Mesh();
         }
-        init_mesh();
+        InitMesh();
 
         change = 0;
     }
@@ -48,9 +48,8 @@ public class DiniSurface : MonoBehaviour
         else if (OVRInput.GetDown(OVRInput.Button.Two))
         {
             change = 1 - change;
-            init_vertices();
-            init_mesh();
-
+            InitVertices();
+            InitMesh();
         }
         else if (OVRInput.GetDown(OVRInput.Button.Three))
         {
@@ -59,8 +58,8 @@ public class DiniSurface : MonoBehaviour
             {
                 constB = 0f;
             }
-            init_vertices();
-            init_mesh();
+            InitVertices();
+            InitMesh();
         }
         else if (OVRInput.GetDown(OVRInput.Button.Four))
         {
@@ -69,13 +68,13 @@ public class DiniSurface : MonoBehaviour
             {
                 constB = .3f;
             }
-            init_vertices();
-            init_mesh();
+            InitVertices();
+            InitMesh();
         }
 
     }
 
-    void init_vertices()
+    void InitVertices()
     {
         for (int u = 0; u <= uSize; u++)
         {
@@ -133,7 +132,7 @@ public class DiniSurface : MonoBehaviour
 
     }
 
-    void init_mesh()
+    void InitMesh()
     {
         mesh.vertices = vertices;
         mesh.triangles = triangles;

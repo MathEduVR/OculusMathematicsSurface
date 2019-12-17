@@ -74,15 +74,16 @@ public class BoursMinimal : MonoBehaviour
                     Triangles[(t + r * DivT) * 6 + 0] = t + r * (DivT + 1);
                     Triangles[(t + r * DivT) * 6 + 1] = t1 + r1 * (DivT + 1);
                     Triangles[(t + r * DivT) * 6 + 2] = t + r1 * (DivT + 1);
-                    Triangles[(t + r * DivT) * 6 + 3] = t + r * (DivT + 1);
                     if (change == 0) {
+                        Triangles[(t + r * DivT) * 6 + 3] = t + r * (DivT + 1);
                         Triangles[(t + r * DivT) * 6 + 4] = t1 + r * (DivT + 1);
                         Triangles[(t + r * DivT) * 6 + 5] = t1 + r1 * (DivT + 1);
                     }
                     else
                     {
-                        Triangles[(t + r * DivT) * 6 + 5] = t1 + r * (DivT + 1);
-                        Triangles[(t + r * DivT) * 6 + 4] = t1 + r1 * (DivT + 1);
+                        Triangles[(t + r * DivT) * 6 + 3] = 0;
+                        Triangles[(t + r * DivT) * 6 + 4] = 0;
+                        Triangles[(t + r * DivT) * 6 + 5] = 0;
                     }
                 }
                 else
@@ -90,16 +91,18 @@ public class BoursMinimal : MonoBehaviour
                     Triangles[(t + r * DivT) * 6 + 0] = t + r * (DivT + 1);
                     Triangles[(t + r * DivT) * 6 + 1] = t + r1 * (DivT + 1);
                     Triangles[(t + r * DivT) * 6 + 2] = t1 + r1 * (DivT + 1);
-                    Triangles[(t + r * DivT) * 6 + 3] = t + r * (DivT + 1);
+                    
                     if (change == 0)
                     {
+                        Triangles[(t + r * DivT) * 6 + 3] = t + r * (DivT + 1);
                         Triangles[(t + r * DivT) * 6 + 4] = t1 + r1 * (DivT + 1);
                         Triangles[(t + r * DivT) * 6 + 5] = t1 + r * (DivT + 1);
                     }
                     else
                     {
-                        Triangles[(t + r * DivT) * 6 + 5] = t1 + r1 * (DivT + 1);
-                        Triangles[(t + r * DivT) * 6 + 4] = t1 + r * (DivT + 1);
+                        Triangles[(t + r * DivT) * 6 + 3] = 0;
+                        Triangles[(t + r * DivT) * 6 + 4] = 0;
+                        Triangles[(t + r * DivT) * 6 + 5] = 0;
                     }
                 }
             }

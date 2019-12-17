@@ -12,6 +12,7 @@ public class PlotSingularFunction : MonoBehaviour
 
     public Mesh MyMesh;
     public bool GraphA;
+    public int change = 0;
 
     public int GraphNumber;
 
@@ -41,6 +42,11 @@ public class PlotSingularFunction : MonoBehaviour
         if (OVRInput.GetDown(OVRInput.Button.Start))
         {
             SceneManager.LoadScene("Scenes/Main");
+        }
+        else if (OVRInput.GetDown(OVRInput.Button.Two))
+        {
+            change = 1 - change;
+            MakeMeshData();
         }
     }
 
@@ -76,18 +82,35 @@ public class PlotSingularFunction : MonoBehaviour
                     Triangles[(t + r * DivT) * 6 + 0] = t + r * (DivT + 1);
                     Triangles[(t + r * DivT) * 6 + 1] = t1 + r1 * (DivT + 1);
                     Triangles[(t + r * DivT) * 6 + 2] = t + r1 * (DivT + 1);
-                    Triangles[(t + r * DivT) * 6 + 3] = t + r * (DivT + 1);
-                    Triangles[(t + r * DivT) * 6 + 4] = t1 + r * (DivT + 1);
-                    Triangles[(t + r * DivT) * 6 + 5] = t1 + r1 * (DivT + 1);
+                    if (change == 0)
+                    {
+                        Triangles[(t + r * DivT) * 6 + 3] = t + r * (DivT + 1);
+                        Triangles[(t + r * DivT) * 6 + 4] = t1 + r * (DivT + 1);
+                        Triangles[(t + r * DivT) * 6 + 5] = t1 + r1 * (DivT + 1);
+                    }
+                    else
+                    {
+                        Triangles[(t + r * DivT) * 6 + 3] = 0;
+                        Triangles[(t + r * DivT) * 6 + 4] = 0;
+                        Triangles[(t + r * DivT) * 6 + 5] = 0;
+                    }
                 }
                 else
                 {
                     Triangles[(t + r * DivT) * 6 + 0] = t + r * (DivT + 1);
                     Triangles[(t + r * DivT) * 6 + 1] = t + r1 * (DivT + 1);
                     Triangles[(t + r * DivT) * 6 + 2] = t1 + r1 * (DivT + 1);
-                    Triangles[(t + r * DivT) * 6 + 3] = t + r * (DivT + 1);
-                    Triangles[(t + r * DivT) * 6 + 4] = t1 + r1 * (DivT + 1);
-                    Triangles[(t + r * DivT) * 6 + 5] = t1 + r * (DivT + 1);
+                    if (change == 0) { 
+                        Triangles[(t + r * DivT) * 6 + 3] = t + r * (DivT + 1);
+                        Triangles[(t + r * DivT) * 6 + 4] = t1 + r1 * (DivT + 1);
+                        Triangles[(t + r * DivT) * 6 + 5] = t1 + r * (DivT + 1);
+                    }
+                    else
+                    {
+                        Triangles[(t + r * DivT) * 6 + 3] = 0;
+                        Triangles[(t + r * DivT) * 6 + 4] = 0;
+                        Triangles[(t + r * DivT) * 6 + 5] = 0;
+                    }
                 }
             }
         }

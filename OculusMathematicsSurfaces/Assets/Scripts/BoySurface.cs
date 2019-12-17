@@ -26,12 +26,12 @@ public class BoySurface : MonoBehaviour
         constA = 1.7f;
         alpha = 1.0f;
 
-        init_vertices();
+        InitVertices();
         if (mesh == null)
         {
             mesh = new Mesh();
         }
-        init_mesh();
+        InitMesh();
 
         change = 0;
     }
@@ -44,18 +44,7 @@ public class BoySurface : MonoBehaviour
 
     void UpdateButton()
     {
-        //if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickUp) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
-        //{
-        //    eyeHeight.y += 0.02f;
-        //    CameraRig.transform.localPosition = eyeHeight;
-        //}
-        //else if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickDown) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
-        //{
-        //    eyeHeight.y -= 0.02f;
-        //    if (eyeHeight.y < 0.2f) eyeHeight.y = 0.2f;
-        //    CameraRig.transform.localPosition = eyeHeight;
-        //}
-        //else 
+
         if (OVRInput.GetDown(OVRInput.Button.Start))
         {
             SceneManager.LoadScene("Scenes/Main");
@@ -63,8 +52,8 @@ public class BoySurface : MonoBehaviour
         else if (OVRInput.GetDown(OVRInput.Button.Two))
         {
             change = 1 - change;
-            init_vertices();
-            init_mesh();
+            InitVertices();
+            InitMesh();
 
         }
         else if (OVRInput.GetDown(OVRInput.Button.Three))
@@ -72,8 +61,8 @@ public class BoySurface : MonoBehaviour
             if (alpha > 0f)
             {
                 alpha -= 0.1f;
-                init_vertices();
-                init_mesh();
+                InitVertices();
+                InitMesh();
 
             }
         }
@@ -82,15 +71,15 @@ public class BoySurface : MonoBehaviour
             if (alpha <1.0f)
             {
                 alpha += 0.1f;
-                init_vertices();
-                init_mesh();
+                InitVertices();
+                InitMesh();
 
             }
         }
 
     }
 
-    void init_vertices()
+    void InitVertices()
     {
         for (int u = 0; u <= uSize; u++)
         {
@@ -108,16 +97,17 @@ public class BoySurface : MonoBehaviour
                 triangles[6 * (u * vSize + v) + 0] = u * (vSize + 1) + v;
                 triangles[6 * (u * vSize + v) + 1] = (u + 1) * (vSize + 1) + v;
                 triangles[6 * (u * vSize + v) + 2] = u * (vSize + 1) + (v + 1);
-                triangles[6 * (u * vSize + v) + 3] = u * (vSize + 1) + (v + 1);
                 if (change == 0)
                 {
+                    triangles[6 * (u * vSize + v) + 3] = u * (vSize + 1) + (v + 1);
                     triangles[6 * (u * vSize + v) + 4] = (u + 1) * (vSize + 1) + v;
                     triangles[6 * (u * vSize + v) + 5] = (u + 1) * (vSize + 1) + (v + 1);
                 }
                 else
                 {
-                    triangles[6 * (u * vSize + v) + 5] = (u + 1) * (vSize + 1) + v;
-                    triangles[6 * (u * vSize + v) + 4] = (u + 1) * (vSize + 1) + (v + 1);
+                    triangles[6 * (u * vSize + v) + 3] = 0;
+                    triangles[6 * (u * vSize + v) + 4] = 0;
+                    triangles[6 * (u * vSize + v) + 5] = 0;
 
                 }
             }
@@ -125,7 +115,7 @@ public class BoySurface : MonoBehaviour
 
     }
 
-    void init_mesh()
+    void InitMesh()
     {
         mesh.vertices = vertices;
         mesh.triangles = triangles;

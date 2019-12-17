@@ -6,125 +6,108 @@ using UnityEngine.SceneManagement;
 public class MoebiusRing : MonoBehaviour
 {
     public Mesh mesh = null;
-    int longitude = 60;
+    int uSize = 120;//uの分割数
+    int vSize = 15;//vの分割数
     public Vector3[] vertices;
     public int[] triangles;
 
-    public GameObject CameraRig;
-    public Vector3 eyeHeight;
+    //public GameObject CameraRig;
+    //public Vector3 eyeHeight;
+
+    public int change =0;
 
     Vector3[] center;
 
     // Start is called before the first frame update
     void Start()
     {
-        center = new Vector3[longitude];
+        center = new Vector3[uSize+1];
         GameObject[] objs = FindObjectsOfType<GameObject>();
-        for (int i = 0; i < objs.Length; i++)
-        {
-            if (objs[i].name.Contains("OVRCameraRig"))
-            {
-                CameraRig = objs[i];
-            }
-        }
         if (mesh == null)
         {
-            init_mesh();
+            InitMesh();
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickDown))
-        //{
-        //    eyeHeight.y -= 0.01f;
-        //    if (eyeHeight.y < 0.2)
-        //    {
-        //        eyeHeight.y = 0.2f;
-        //    }
-        //    CameraRig.transform.localPosition = eyeHeight;
-        //}
-        //else if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickUp))
-        //{
-        //    eyeHeight.y += 0.01f;
-        //    CameraRig.transform.localPosition = eyeHeight;
-        //}
         if (OVRInput.GetDown(OVRInput.Button.One))
         {
-            GetComponent<Rigidbody>().useGravity = true;
+            if (GetComponent<Rigidbody>().useGravity == false)
+            {
+                GetComponent<Rigidbody>().isKinematic = false;
+                GetComponent<Rigidbody>().useGravity = true;
+            }
+            else
+            {
+                transform.position = new Vector3(0f, 1f, 4f);
+                transform.rotation = Quaternion.identity;
+                GetComponent<Rigidbody>().isKinematic = true;
+                GetComponent<Rigidbody>().useGravity = false;
+            }
         }
         else if (OVRInput.GetDown(OVRInput.Button.Start))
         {
             SceneManager.LoadScene("Scenes/Main");
         }
+        else if (OVRInput.GetDown(OVRInput.Button.Two))
+        {
+            change = 1 - change;
+            InitMesh();
+
+        }
     }
 
-    void init_mesh()
+    void InitMesh()
     {
-        vertices = new Vector3[longitude * 4];
-        triangles = new int[3 * 4 * longitude];
-
-        for (int i = 0; i < longitude; i++)
+        vertices = new Vector3[(uSize + 1) * (vSize + 1)];//頂点の座標
+        triangles = new int[uSize * vSize * 6];//三角形の個数*3の長さの配列
+        
+        for (int i = 0; i <= uSize; i++)
         {
             center[i] = new Vector3(
-                2f * Mathf.Cos(2 * Mathf.PI * i / longitude),
-                2f * Mathf.Sin(2 * Mathf.PI * i / longitude),
+                2f * Mathf.Cos(4 * Mathf.PI * i / uSize),
+                2f * Mathf.Sin(4 * Mathf.PI * i / uSize),
                 0f
                 );
         }
-        for (int i = 0; i < longitude; i++)
+        for (int u = 0; u <= uSize; u++)
         {
-            int i1 = (i + 1) % longitude;
-            Vector3 v0 = center[i1] - center[i];
-            Vector3 v1 = center[i];
+            int u1 = (u + 1) % uSize;
+            Vector3 v0 = center[u1] - center[u];
+            Vector3 v1 = center[u];
             Vector3 v2 = Vector3.Cross(v0, v1);
             v1.Normalize();
             v2.Normalize();
-            float angle = Mathf.PI * i / longitude;
+            float angle = 2 * Mathf.PI * u / uSize;
             Vector3 w1 = Mathf.Cos(angle) * v1 - Mathf.Sin(angle) * v2;
-            Vector3 w2 = Mathf.Sin(angle) * v1 + Mathf.Cos(angle) * v2;
-            vertices[i * 4 + 0] = new Vector3();
-            vertices[i * 4 + 1] = new Vector3();
-            vertices[i * 4 + 2] = new Vector3();
-            vertices[i * 4 + 3] = new Vector3();
-            vertices[i * 4 + 0] = center[i] + w1 + w2 * 0.01f;
-            vertices[i * 4 + 1] = center[i] - w1 + w2 * 0.01f;
-            vertices[i * 4 + 2] = center[i] + w1 - w2 * 0.01f;
-            vertices[i * 4 + 3] = center[i] - w1 - w2 * 0.01f;
-        }
-        for (int i = 0; i < longitude; i++)
-        {
-            int i1 = (i + 1) % longitude;
-            if (i < longitude - 1)
+            for (int v = 0; v <= vSize; v++)
             {
-                triangles[12 * i + 0] = 4 * i;
-                triangles[12 * i + 1] = 4 * i + 1;
-                triangles[12 * i + 2] = 4 * i1;
-                triangles[12 * i + 3] = 4 * i1;
-                triangles[12 * i + 4] = 4 * i + 1;
-                triangles[12 * i + 5] = 4 * i1 + 1;
-                triangles[12 * i + 6] = 4 * i + 2;
-                triangles[12 * i + 7] = 4 * i1 + 2;
-                triangles[12 * i + 8] = 4 * i + 3;
-                triangles[12 * i + 9] = 4 * i + 3;
-                triangles[12 * i + 10] = 4 * i1 + 2;
-                triangles[12 * i + 11] = 4 * i1 + 3;
+                float vv = -1f + 2f * v / vSize; 
+                vertices[u * (vSize + 1) + v] = center[u] + vv* w1;
             }
-            else
+        }
+        for (int u = 0; u < uSize; u++)
+        {
+            for (int v = 0; v < vSize; v++)
             {
-                triangles[12 * i + 0] = 4 * i;
-                triangles[12 * i + 1] = 4 * i + 1;
-                triangles[12 * i + 2] = 4 * i1 + 3;
-                triangles[12 * i + 3] = 4 * i1 + 3;
-                triangles[12 * i + 4] = 4 * i + 1;
-                triangles[12 * i + 5] = 4 * i1 + 2;
-                triangles[12 * i + 6] = 4 * i + 2;
-                triangles[12 * i + 7] = 4 * i1 + 1;
-                triangles[12 * i + 8] = 4 * i + 3;
-                triangles[12 * i + 9] = 4 * i + 3;
-                triangles[12 * i + 10] = 4 * i1 + 1;
-                triangles[12 * i + 11] = 4 * i1 + 0;
+                triangles[6 * (u * vSize + v) + 0] = u * (vSize + 1) + v;
+                triangles[6 * (u * vSize + v) + 1] = (u + 1) * (vSize + 1) + v;
+                triangles[6 * (u * vSize + v) + 2] = u * (vSize + 1) + (v + 1);
+                if (change == 0)
+                {
+                    triangles[6 * (u * vSize + v) + 3] = u * (vSize + 1) + (v + 1);
+                    triangles[6 * (u * vSize + v) + 4] = (u + 1) * (vSize + 1) + v;
+                    triangles[6 * (u * vSize + v) + 5] = (u + 1) * (vSize + 1) + (v + 1);
+                }
+                else
+                {
+                    triangles[6 * (u * vSize + v) + 3] = 0;
+                    triangles[6 * (u * vSize + v) + 4] = 0;
+                    triangles[6 * (u * vSize + v) + 5] = 0;
+
+                }
             }
         }
         mesh = new Mesh();

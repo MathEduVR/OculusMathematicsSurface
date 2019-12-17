@@ -894,7 +894,7 @@ GameObject:
   - component: {fileID: 914638824}
   - component: {fileID: 914638823}
   m_Layer: 0
-  m_Name: New Text
+  m_Name: ControllerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -912,7 +912,8 @@ TextMesh:
     Thumbstick RIGHT] Go right  \r\n[Left Thumbstick LEFT] Go left  \r\n[Right Thumbstick
     RIGHT] Turn right  \r\n[Right Thumbstick LEFT] Turn left  \r\n\r\n[Left Index
     Trigger]+[Left Thumbstick UP] Go up  \r\n[Left Index Trigger]+[Left Thumbstick
-    DOWN] Go down \r \r\n\r\n[Left Start] Go back to Surface museum"
+    DOWN] Go down \r \r\n\r\n[Button B]  Surface <-> Mesh\n\n[Left Start] Go back
+    to Surface museum"
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -1303,6 +1304,7 @@ MonoBehaviour:
   DivT: 0
   MyMesh: {fileID: 0}
   GraphA: 1
+  change: 0
   GraphNumber: 2
   CameraRig: {fileID: 1526960893}
   eyeHeight: {x: 0, y: 1, z: 0}
@@ -1762,6 +1764,7 @@ MonoBehaviour:
   DivT: 0
   MyMesh: {fileID: 0}
   GraphA: 0
+  change: 0
   GraphNumber: 2
   CameraRig: {fileID: 1526960893}
   eyeHeight: {x: 0, y: 1, z: 0}

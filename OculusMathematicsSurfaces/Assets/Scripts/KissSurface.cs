@@ -11,10 +11,11 @@ public class KissSurface : MonoBehaviour
     public Vector3[] vertices;
     public int[] triangles;
 
-    public GameObject CameraRig;
-    public Vector3 eyeHeight = Vector3.up;
+    //public GameObject CameraRig;
+    //public Vector3 eyeHeight = Vector3.up;
 
-
+    public bool sideA;
+    public int change = 0;
     public float constA, constB;
     // Start is called before the first frame update
     void Start()
@@ -24,21 +25,21 @@ public class KissSurface : MonoBehaviour
         constA = 2.5f;
         constB = 0f;
 
-        init_vertices();
+        InitVertices();
         if (mesh == null)
         {
             mesh = new Mesh();
         }
-        init_mesh();
-        GameObject[] objs = FindObjectsOfType<GameObject>();
-        for (int i = 0; i < objs.Length; i++)
-        {
-            if (objs[i].name.Contains("OVRCameraRig"))
-            {
-                CameraRig = objs[i];
-            }
-        }
-        CameraRig.transform.localPosition = eyeHeight;
+        InitMesh();
+        //GameObject[] objs = FindObjectsOfType<GameObject>();
+        //for (int i = 0; i < objs.Length; i++)
+        //{
+        //    if (objs[i].name.Contains("OVRCameraRig"))
+        //    {
+        //        CameraRig = objs[i];
+        //    }
+        //}
+        //CameraRig.transform.localPosition = eyeHeight;
 
 
     }
@@ -51,25 +52,20 @@ public class KissSurface : MonoBehaviour
 
     void UpdateButton()
     {
-        //if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickUp) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
-        //{
-        //    eyeHeight.y += 0.02f;
-        //    CameraRig.transform.localPosition = eyeHeight;
-        //}
-        //else if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickDown) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
-        //{
-        //    eyeHeight.y -= 0.02f;
-        //    if (eyeHeight.y < 0.2f) eyeHeight.y = 0.2f;
-        //    CameraRig.transform.localPosition = eyeHeight;
-        //}
-        //else 
+ 
         if (OVRInput.GetDown(OVRInput.Button.Start))
         {
             SceneManager.LoadScene("Scenes/Main");
         }
+        else if (OVRInput.GetDown(OVRInput.Button.Two))
+        {
+            change = 1 - change;
+            InitVertices();
+            InitMesh();
+        }
     }
 
-    void init_vertices()
+    void InitVertices()
     {
         for (int u = 0; u <= uSize; u++)
         {
@@ -87,18 +83,50 @@ public class KissSurface : MonoBehaviour
         {
             for (int v = 0; v < vSize; v++)
             {
-                triangles[6 * (u * vSize + v) + 0] = u * (vSize + 1) + v;
-                triangles[6 * (u * vSize + v) + 2] = (u + 1) * (vSize + 1) + v;
-                triangles[6 * (u * vSize + v) + 1] = u * (vSize + 1) + (v + 1);
-                triangles[6 * (u * vSize + v) + 3] = u * (vSize + 1) + (v + 1);
-                triangles[6 * (u * vSize + v) + 5] = (u + 1) * (vSize + 1) + v;
-                triangles[6 * (u * vSize + v) + 4] = (u + 1) * (vSize + 1) + (v + 1);
+                if (sideA)
+                {
+                    triangles[6 * (u * vSize + v) + 0] = u * (vSize + 1) + v;
+                    triangles[6 * (u * vSize + v) + 1] = (u + 1) * (vSize + 1) + v;
+                    triangles[6 * (u * vSize + v) + 2] = u * (vSize + 1) + (v + 1);
+                    if (change == 0)
+                    {
+                        triangles[6 * (u * vSize + v) + 3] = u * (vSize + 1) + (v + 1);
+                        triangles[6 * (u * vSize + v) + 4] = (u + 1) * (vSize + 1) + v;
+                        triangles[6 * (u * vSize + v) + 5] = (u + 1) * (vSize + 1) + (v + 1);
+                    }
+                    else
+                    {
+                        triangles[6 * (u * vSize + v) + 3] = 0;
+                        triangles[6 * (u * vSize + v) + 4] = 0;
+                        triangles[6 * (u * vSize + v) + 5] = 0;
+
+                    }
+                }
+                else
+                {
+                    triangles[6 * (u * vSize + v) + 0] = u * (vSize + 1) + v;
+                    triangles[6 * (u * vSize + v) + 2] = (u + 1) * (vSize + 1) + v;
+                    triangles[6 * (u * vSize + v) + 1] = u * (vSize + 1) + (v + 1);
+                    if (change == 0)
+                    {
+                        triangles[6 * (u * vSize + v) + 3] = u * (vSize + 1) + (v + 1);
+                        triangles[6 * (u * vSize + v) + 5] = (u + 1) * (vSize + 1) + v;
+                        triangles[6 * (u * vSize + v) + 4] = (u + 1) * (vSize + 1) + (v + 1);
+                    }
+                    else
+                    {
+                        triangles[6 * (u * vSize + v) + 3] = 0;
+                        triangles[6 * (u * vSize + v) + 4] = 0;
+                        triangles[6 * (u * vSize + v) + 5] = 0;
+
+                    }
+                }
             }
         }
 
     }
 
-    void init_mesh()
+    void InitMesh()
     {
         mesh.vertices = vertices;
         mesh.triangles = triangles;

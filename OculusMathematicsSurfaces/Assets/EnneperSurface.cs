@@ -27,7 +27,7 @@ void Start()
     MaxT = Mathf.PI ;
     MinT = -Mathf.PI;
     DivR = 40;
-    DivT = 80;
+    DivT = 120;
     stepR = (MaxR-MinR) / DivR;
     stepT = (MaxT-MinT) / DivT;
     MyMesh = new Mesh();
@@ -47,7 +47,6 @@ void Update()
     {
         change = 1 - change;
         MakeMeshData();
-
     }
 }
 
@@ -75,16 +74,17 @@ void MakeMeshData()
                 Triangles[(t + r * DivT) * 6 + 0] = t + r * (DivT + 1);
                 Triangles[(t + r * DivT) * 6 + 1] = t1 + r1 * (DivT + 1);
                 Triangles[(t + r * DivT) * 6 + 2] = t + r1 * (DivT + 1);
-                Triangles[(t + r * DivT) * 6 + 3] = t + r * (DivT + 1);
                 if (change == 0)
                 {
+                    Triangles[(t + r * DivT) * 6 + 3] = t + r * (DivT + 1);
                     Triangles[(t + r * DivT) * 6 + 4] = t1 + r * (DivT + 1);
                     Triangles[(t + r * DivT) * 6 + 5] = t1 + r1 * (DivT + 1);
                 }
                 else
                 {
-                    Triangles[(t + r * DivT) * 6 + 5] = t1 + r * (DivT + 1);
-                    Triangles[(t + r * DivT) * 6 + 4] = t1 + r1 * (DivT + 1);
+                    Triangles[(t + r * DivT) * 6 + 3] = 0;
+                    Triangles[(t + r * DivT) * 6 + 5] = 0;
+                    Triangles[(t + r * DivT) * 6 + 4] = 0;
                 }
             }
             else
@@ -92,16 +92,17 @@ void MakeMeshData()
                 Triangles[(t + r * DivT) * 6 + 0] = t + r * (DivT + 1);
                 Triangles[(t + r * DivT) * 6 + 1] = t + r1 * (DivT + 1);
                 Triangles[(t + r * DivT) * 6 + 2] = t1 + r1 * (DivT + 1);
-                Triangles[(t + r * DivT) * 6 + 3] = t + r * (DivT + 1);
                 if (change == 0)
                 {
+                    Triangles[(t + r * DivT) * 6 + 3] = t + r * (DivT + 1);
                     Triangles[(t + r * DivT) * 6 + 4] = t1 + r1 * (DivT + 1);
                     Triangles[(t + r * DivT) * 6 + 5] = t1 + r * (DivT + 1);
                 }
                 else
                 {
-                    Triangles[(t + r * DivT) * 6 + 5] = t1 + r1 * (DivT + 1);
-                    Triangles[(t + r * DivT) * 6 + 4] = t1 + r * (DivT + 1);
+                    Triangles[(t + r * DivT) * 6 + 3] = 0;
+                    Triangles[(t + r * DivT) * 6 + 5] = 0;
+                    Triangles[(t + r * DivT) * 6 + 4] = 0;
                 }
             }
         }

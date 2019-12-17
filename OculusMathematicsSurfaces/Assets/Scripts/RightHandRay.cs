@@ -186,7 +186,6 @@ public class RightHandRay : MonoBehaviour
                 {
                     SceneManager.LoadScene("Scenes/Enneper");
                 }
-
                 //FakeGyroid
                 else if (obj.name.Contains("box_FakeGyroid"))
                 {

@@ -15,6 +15,10 @@ public class DupinCyclide : MonoBehaviour
     public float rate1, rate2;
 
     public float constA, constB, constC, constD;
+
+    public int change = 0;
+    public bool sideA;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,12 +35,12 @@ public class DupinCyclide : MonoBehaviour
         constC = Mathf.Sqrt(constA * constA - constB * constB);
         constD = constC * rate2;
 
-        init_vertices();
+        InitVertices();
         if (mesh == null)
         {
             mesh = new Mesh();
         }
-        init_mesh();
+        InitMesh();
         GameObject[] objs = FindObjectsOfType<GameObject>();
         for (int i = 0; i < objs.Length; i++)
         {
@@ -58,19 +62,8 @@ public class DupinCyclide : MonoBehaviour
 
     void UpdateButton()
     {
-        //if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickUp) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
-        //{
-        //    eyeHeight.y += 0.02f;
-        //    CameraRig.transform.localPosition = eyeHeight;
-        //}
-        //else if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickDown) && OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))
-        //{
-        //    eyeHeight.y -= 0.02f;
-        //    if (eyeHeight.y < 0.2f) eyeHeight.y = 0.2f;
-        //    CameraRig.transform.localPosition = eyeHeight;
-        //}
-        //else 
-        if (OVRInput.Get(OVRInput.Button.One))// rate1 --
+
+        if (!OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger) && OVRInput.Get(OVRInput.Button.Three))// rate1 --
         {
             rate1 -= 0.002f;
             if (rate1 < 0.01f) rate1 = 0.01f;
@@ -78,10 +71,10 @@ public class DupinCyclide : MonoBehaviour
             constB = constA * rate1;
             constC = Mathf.Sqrt(constA * constA - constB * constB);
             constD = constC * rate2;
-            init_vertices();
-            init_mesh();
+            InitVertices();
+            InitMesh();
         }
-        else if (OVRInput.Get(OVRInput.Button.Two))// rate1 ++
+        else if (!OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger) && OVRInput.Get(OVRInput.Button.Four))// rate1 ++
         {
             rate1 += 0.002f;
             if (rate1 > 0.99f) rate1 = 0.99f;
@@ -89,10 +82,10 @@ public class DupinCyclide : MonoBehaviour
             constB = constA * rate1;
             constC = Mathf.Sqrt(constA * constA - constB * constB);
             constD = constC * rate2;
-            init_vertices();
-            init_mesh();
+            InitVertices();
+            InitMesh();
         }
-        else if (OVRInput.Get(OVRInput.Button.Three))// rate2 --
+        else if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger) && OVRInput.Get(OVRInput.Button.Three))// rate2 --
         {
             rate2 -= 0.01f;
             if (rate2 < 0.01f) rate2 = 0.01f;
@@ -100,18 +93,24 @@ public class DupinCyclide : MonoBehaviour
             constB = constA * rate1;
             constC = Mathf.Sqrt(constA * constA - constB * constB);
             constD = constC * rate2;
-            init_vertices();
-            init_mesh();
+            InitVertices();
+            InitMesh();
         }
-        else if (OVRInput.Get(OVRInput.Button.Four))// rate2 ++
+        else if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger) && OVRInput.Get(OVRInput.Button.Four))// rate2 ++
         {
             rate2 += 0.01f;
             constA = 1f;
             constB = constA * rate1;
             constC = Mathf.Sqrt(constA * constA - constB * constB);
             constD = constC * rate2;
-            init_vertices();
-            init_mesh();
+            InitVertices();
+            InitMesh();
+        }
+        else if (OVRInput.GetDown(OVRInput.Button.Two))
+        {
+            change = 1 - change;
+            InitVertices();
+            InitMesh();
         }
         else if (OVRInput.GetDown(OVRInput.Button.Start))
         {
@@ -119,7 +118,7 @@ public class DupinCyclide : MonoBehaviour
         }
     }
 
-    void init_vertices()
+    void InitVertices()
     {
         for (int u = 0; u <= uSize; u++)
         {
@@ -137,18 +136,50 @@ public class DupinCyclide : MonoBehaviour
         {
             for (int v = 0; v < vSize; v++)
             {
-                triangles[6 * (u * vSize + v) + 0] = u * (vSize+1) + v;
-                triangles[6 * (u * vSize + v) + 1] = (u + 1) * (vSize + 1) + v;
-                triangles[6 * (u * vSize + v) + 2] = u * (vSize + 1) + (v + 1);
-                triangles[6 * (u * vSize + v) + 3] = u * (vSize + 1) + (v + 1);
-                triangles[6 * (u * vSize + v) + 4] = (u + 1) * (vSize + 1) + v;
-                triangles[6 * (u * vSize + v) + 5] = (u + 1) * (vSize + 1) + (v + 1);
+                if (sideA)
+                {
+                    triangles[6 * (u * vSize + v) + 0] = u * (vSize + 1) + v;
+                    triangles[6 * (u * vSize + v) + 1] = (u + 1) * (vSize + 1) + v;
+                    triangles[6 * (u * vSize + v) + 2] = u * (vSize + 1) + (v + 1);
+                    if (change == 0)
+                    {
+                        triangles[6 * (u * vSize + v) + 3] = u * (vSize + 1) + (v + 1);
+                        triangles[6 * (u * vSize + v) + 4] = (u + 1) * (vSize + 1) + v;
+                        triangles[6 * (u * vSize + v) + 5] = (u + 1) * (vSize + 1) + (v + 1);
+                    }
+                    else
+                    {
+                        triangles[6 * (u * vSize + v) + 3] = 0;
+                        triangles[6 * (u * vSize + v) + 4] = 0;
+                        triangles[6 * (u * vSize + v) + 5] = 0;
+
+                    }
+                }
+                else
+                {
+                    triangles[6 * (u * vSize + v) + 0] = u * (vSize + 1) + v;
+                    triangles[6 * (u * vSize + v) + 2] = (u + 1) * (vSize + 1) + v;
+                    triangles[6 * (u * vSize + v) + 1] = u * (vSize + 1) + (v + 1);
+                    if (change == 0)
+                    {
+                        triangles[6 * (u * vSize + v) + 3] = u * (vSize + 1) + (v + 1);
+                        triangles[6 * (u * vSize + v) + 5] = (u + 1) * (vSize + 1) + v;
+                        triangles[6 * (u * vSize + v) + 4] = (u + 1) * (vSize + 1) + (v + 1);
+                    }
+                    else
+                    {
+                        triangles[6 * (u * vSize + v) + 3] = 0;
+                        triangles[6 * (u * vSize + v) + 4] = 0;
+                        triangles[6 * (u * vSize + v) + 5] = 0;
+
+                    }
+                }
             }
         }
 
     }
 
-    void init_mesh()
+    void InitMesh()
     {
         mesh.vertices = vertices;
         mesh.triangles = triangles;

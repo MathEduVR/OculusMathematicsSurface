@@ -21,12 +21,12 @@ public class KuenSurface : MonoBehaviour
         triangles = new int[uSize * vSize * 6];//三角形の個数*3の長さの配列
         constA = 1.1f;
 
-        init_vertices();
+        InitVertices();
         if (mesh == null)
         {
             mesh = new Mesh();
         }
-        init_mesh();
+        InitMesh();
 
         change = 0;
     }
@@ -47,13 +47,12 @@ public class KuenSurface : MonoBehaviour
         else if (OVRInput.GetDown(OVRInput.Button.Two))
         {
             change = 1 - change;
-            init_vertices();
-            init_mesh();
-
+            InitVertices();
+            InitMesh();
         }
     }
 
-    void init_vertices()
+    void InitVertices()
     {
         for (int u = 0; u <= uSize; u++)
         {
@@ -111,7 +110,7 @@ public class KuenSurface : MonoBehaviour
 
     }
 
-    void init_mesh()
+    void InitMesh()
     {
         mesh.vertices = vertices;
         mesh.triangles = triangles;
