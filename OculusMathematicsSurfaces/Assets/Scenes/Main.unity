@@ -377,7 +377,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9e3f9daa895c6fa4c96a184730d72c37, type: 2}
+  - {fileID: 2100000, guid: b72f20b13269b4be29ec790ecc04a34b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2520,9 +2520,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 595545433}
-  m_Text: 'Dupin
-
-    Cyclide'
+  m_Text: xxx
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -3545,9 +3543,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.33333334, y: -0.35, z: -0.55}
   m_LocalScale: {x: 0.083333336, y: 0.1, z: 0.1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1304063108}
   m_Father: {fileID: 764857289}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &761989832
 MeshRenderer:
@@ -3566,7 +3565,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fb294ed528162b6419c4beb769211f94, type: 2}
+  - {fileID: 2100000, guid: b5280f15b0044b042881085b6d9b83e4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3639,13 +3638,9 @@ Transform:
   m_LocalScale: {x: 12, y: 10, z: 1}
   m_Children:
   - {fileID: 1955016743}
-  - {fileID: 1853204074}
   - {fileID: 1605934195}
-  - {fileID: 1782459815}
   - {fileID: 1903505070}
-  - {fileID: 1503239439}
   - {fileID: 761989830}
-  - {fileID: 1304063108}
   m_Father: {fileID: 1931272649}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -6990,11 +6985,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1304063107}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.33333334, y: -0.29999998, z: -0.55}
-  m_LocalScale: {x: 0.01666667, y: 0.020000001, z: 0.2}
+  m_LocalPosition: {x: 0, y: 0.5000001, z: 0}
+  m_LocalScale: {x: 0.20000003, y: 0.20000002, z: 2}
   m_Children: []
-  m_Father: {fileID: 764857289}
-  m_RootOrder: 7
+  m_Father: {fileID: 761989830}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!102 &1304063109
 TextMesh:
@@ -7004,9 +6999,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1304063107}
-  m_Text: 'Clebsch
-
-    Surface'
+  m_Text: xxx
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -8402,11 +8395,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503239438}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.16666667, y: -0.29999998, z: -0.55}
-  m_LocalScale: {x: 0.01666667, y: 0.020000001, z: 0.2}
+  m_LocalPosition: {x: 0, y: 0.5000001, z: 0}
+  m_LocalScale: {x: 0.20000003, y: 0.20000002, z: 2}
   m_Children: []
-  m_Father: {fileID: 764857289}
-  m_RootOrder: 5
+  m_Father: {fileID: 1903505070}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!102 &1503239440
 TextMesh:
@@ -8416,9 +8409,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503239438}
-  m_Text: 'Dupin
-
-    Cyclide'
+  m_Text: xxx
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -8874,9 +8865,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.16666667, y: -0.35, z: -0.55}
   m_LocalScale: {x: 0.083333336, y: 0.1, z: 0.1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1782459815}
   m_Father: {fileID: 764857289}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1605934197
 MeshRenderer:
@@ -8895,7 +8887,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: df21bd26c5570a4499f8e5b174a6038d, type: 2}
+  - {fileID: 2100000, guid: 6498d4298a35c5c44894b5f194468896, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10238,11 +10230,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1782459814}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.16666667, y: -0.29999998, z: -0.55}
-  m_LocalScale: {x: 0.01666667, y: 0.020000001, z: 0.2}
+  m_LocalPosition: {x: 0, y: 0.5000001, z: 0}
+  m_LocalScale: {x: 0.20000003, y: 0.20000002, z: 2}
   m_Children: []
-  m_Father: {fileID: 764857289}
-  m_RootOrder: 3
+  m_Father: {fileID: 1605934195}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!102 &1782459816
 TextMesh:
@@ -10252,9 +10244,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1782459814}
-  m_Text: 'Seifert
-
-    Surface'
+  m_Text: xxx
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -10957,11 +10947,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1853204073}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.29999998, z: -0.54800004}
-  m_LocalScale: {x: 0.01666667, y: 0.020000001, z: 0.2}
+  m_LocalPosition: {x: 0, y: 0.5000001, z: 0.02000153}
+  m_LocalScale: {x: 0.20000003, y: 0.20000002, z: 2}
   m_Children: []
-  m_Father: {fileID: 764857289}
-  m_RootOrder: 1
+  m_Father: {fileID: 1955016743}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!102 &1853204075
 TextMesh:
@@ -10971,9 +10961,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1853204073}
-  m_Text: 'Moebius
-
-    Band'
+  m_Text: xxx
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -11179,9 +11167,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.16666667, y: -0.35, z: -0.55}
   m_LocalScale: {x: 0.083333336, y: 0.1, z: 0.1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1503239439}
   m_Father: {fileID: 764857289}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1903505072
 MeshRenderer:
@@ -11200,7 +11189,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9e3f9daa895c6fa4c96a184730d72c37, type: 2}
+  - {fileID: 2100000, guid: b5280f15b0044b042881085b6d9b83e4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11860,7 +11849,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.35, z: -0.55}
   m_LocalScale: {x: 0.083333336, y: 0.1, z: 0.1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1853204074}
   m_Father: {fileID: 764857289}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
