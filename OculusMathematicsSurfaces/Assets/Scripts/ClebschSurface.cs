@@ -26,6 +26,10 @@ public class ClebschSurface : MonoBehaviour
     public GameObject Line;
     public int LineNumber;
 
+    private float f000, f001, f010, f011, f100, f101, f110, f111;
+    private float x0, y0, z0;
+    private float x1, y1, z1;
+
 
     float InnerDivision(float x1, float x2, float rate1, float rate2)
     {
@@ -56,174 +60,24 @@ public class ClebschSurface : MonoBehaviour
 
         mesh = new Mesh();
 
-        for (float x0 = -border; x0 <= border; x0 += step)
+        for (x0 = -border; x0 <= border; x0 += step)
         {
-            float x1 = x0 + step;
-            for (float y0 = -border; y0 <= border; y0 += step)
+            x1 = x0 + step;
+            for (y0 = -border; y0 <= border; y0 += step)
             {
-                float y1 = y0 + step;
-                for (float z0 = -border; z0 <= border; z0 += step)
+                y1 = y0 + step;
+                for (z0 = -border; z0 <= border; z0 += step)
                 {
-                    float z1 = z0 + step;
-                    float f000 = F(x0, y0, z0);
-                    float f001 = F(x0, y0, z1);
-                    float f010 = F(x0, y1, z0);
-                    float f011 = F(x0, y1, z1);
-                    float f100 = F(x1, y0, z0);
-                    float f101 = F(x1, y0, z1);
-                    float f110 = F(x1, y1, z0);
-                    float f111 = F(x1, y1, z1);
-                    int verticesCount = vertices.Count;
-                    int count = 0;
-                    if (f000 * f001 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            x0,
-                            y0,
-                            InnerDivision(z0, z1, f000, f001)
-                            ));
-                        count++;
-                    }
-                    if (count < 3 && f000 * f100 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            InnerDivision(x0, x1, f000, f100),
-                            y0,
-                            z0
-                            ));
-                        count++;
-                    }
-                    if (count < 3 && f000 * f010 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            x0,
-                            InnerDivision(y0, y1, f000, f010),
-                            z0
-                            ));
-                        count++;
-                    }
-
-                    if (count < 3 && f001 * f101 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            InnerDivision(x0, x1, f001, f101),
-                            y0,
-                            z1
-                            ));
-                        count++;
-                    }
-                    if (count < 3 && f001 * f011 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            x0,
-                            InnerDivision(y0, y1, f001, f011),
-                            z1
-                            ));
-                        count++;
-                    }
-                    if (count < 3 && f100 * f110 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            x1,
-                            InnerDivision(y0, y1, f100, f110),
-                            z0
-                            ));
-                        count++;
-                    }
-                    if (count < 3 && f100 * f101 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            x1,
-                            y0,
-                            InnerDivision(z0, z1, f100, f101)
-                            ));
-                        count++;
-                    }
-                    if (count < 3 && f010 * f011 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            x0,
-                            y1,
-                            InnerDivision(z0, z1, f010, f011)
-                            ));
-                        count++;
-                    }
-                    if (count < 3 && f010 * f110 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            InnerDivision(x0, x1, f010, f110),
-                            y1,
-                            z0
-                            ));
-                        count++;
-                    }
-
-                    if (count < 3 && f110 * f111 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            x1,
-                            y1,
-                            InnerDivision(z0, z1, f110, f111)
-                            ));
-                        count++;
-                    }
-                    if (count < 3 && f011 * f111 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            InnerDivision(x0, x1, f011, f111),
-                            y1,
-                            z1
-                            ));
-                        count++;
-                    }
-                    if (count < 3 && f101 * f111 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            x1,
-                            InnerDivision(y0, y1, f101, f111),
-                            z1
-                            ));
-                        count++;
-                    }
-                    int vCount = vertices.Count - verticesCount;
-                    //Debug.Log(vCount);
-                    if (vCount >= 3)
-                    {
-                        Vector3 normal = Vector3.Cross(vertices[verticesCount + 1] - vertices[verticesCount],
-                            vertices[verticesCount + 2] - vertices[verticesCount]);
-                        Vector3 grad = GradF(vertices[verticesCount]);
-                        if (SurfaceA)
-                        {
-                            if (Vector3.Dot(normal, grad) > 0f)
-                            {
-                                triangles.Add(verticesCount);
-                                triangles.Add(verticesCount + 1);
-                                triangles.Add(verticesCount + 2);
-                            }
-                            else
-                            {
-                                triangles.Add(verticesCount + 2);
-                                triangles.Add(verticesCount + 1);
-                                triangles.Add(verticesCount);
-                            }
-                        }
-                        else
-                        {
-                            if (Vector3.Dot(normal, grad) < 0f)
-                            {
-                                triangles.Add(verticesCount);
-                                triangles.Add(verticesCount + 1);
-                                triangles.Add(verticesCount + 2);
-                            }
-                            else
-                            {
-                                triangles.Add(verticesCount + 2);
-                                triangles.Add(verticesCount + 1);
-                                triangles.Add(verticesCount);
-                            }
-                        }
-                    }
-
+                    z1 = z0 + step;
+                    f000 = F(x0, y0, z0);
+                    f001 = F(x0, y0, z1);
+                    f010 = F(x0, y1, z0);
+                    f011 = F(x0, y1, z1);
+                    f100 = F(x1, y0, z0);
+                    f101 = F(x1, y0, z1);
+                    f110 = F(x1, y1, z0);
+                    f111 = F(x1, y1, z1);
+                    MarchingCube0();
                 }
             }
         }
@@ -547,4 +401,288 @@ public class ClebschSurface : MonoBehaviour
         float zz = (a * (e * 0 - h * q) + d * (h * p - b * 0) + g * (b * q - e * p)) / den;
         return new Vector3(xx, yy, zz);
     }
+
+    void MarchingCube0() 
+    {
+        int verticesCount = vertices.Count;
+        int count = 0;
+        if (f000 * f001 < 0f)
+        {
+            vertices.Add(new Vector3(
+                x0,
+                y0,
+                InnerDivision(z0, z1, f000, f001)
+                ));
+            count++;
+        }
+        if (count < 3 && f000 * f100 < 0f)
+        {
+            vertices.Add(new Vector3(
+                InnerDivision(x0, x1, f000, f100),
+                y0,
+                z0
+                ));
+            count++;
+        }
+        if (count < 3 && f000 * f010 < 0f)
+        {
+            vertices.Add(new Vector3(
+                x0,
+                InnerDivision(y0, y1, f000, f010),
+                z0
+                ));
+            count++;
+        }
+
+        if (count < 3 && f001 * f101 < 0f)
+        {
+            vertices.Add(new Vector3(
+                InnerDivision(x0, x1, f001, f101),
+                y0,
+                z1
+                ));
+            count++;
+        }
+        if (count < 3 && f001 * f011 < 0f)
+        {
+            vertices.Add(new Vector3(
+                x0,
+                InnerDivision(y0, y1, f001, f011),
+                z1
+                ));
+            count++;
+        }
+        if (count < 3 && f100 * f110 < 0f)
+        {
+            vertices.Add(new Vector3(
+                x1,
+                InnerDivision(y0, y1, f100, f110),
+                z0
+                ));
+            count++;
+        }
+        if (count < 3 && f100 * f101 < 0f)
+        {
+            vertices.Add(new Vector3(
+                x1,
+                y0,
+                InnerDivision(z0, z1, f100, f101)
+                ));
+            count++;
+        }
+        if (count < 3 && f010 * f011 < 0f)
+        {
+            vertices.Add(new Vector3(
+                x0,
+                y1,
+                InnerDivision(z0, z1, f010, f011)
+                ));
+            count++;
+        }
+        if (count < 3 && f010 * f110 < 0f)
+        {
+            vertices.Add(new Vector3(
+                InnerDivision(x0, x1, f010, f110),
+                y1,
+                z0
+                ));
+            count++;
+        }
+
+        if (count < 3 && f110 * f111 < 0f)
+        {
+            vertices.Add(new Vector3(
+                x1,
+                y1,
+                InnerDivision(z0, z1, f110, f111)
+                ));
+            count++;
+        }
+        if (count < 3 && f011 * f111 < 0f)
+        {
+            vertices.Add(new Vector3(
+                InnerDivision(x0, x1, f011, f111),
+                y1,
+                z1
+                ));
+            count++;
+        }
+        if (count < 3 && f101 * f111 < 0f)
+        {
+            vertices.Add(new Vector3(
+                x1,
+                InnerDivision(y0, y1, f101, f111),
+                z1
+                ));
+            count++;
+        }
+        int vCount = vertices.Count - verticesCount;
+        //Debug.Log(vCount);
+        if (vCount >= 3)
+        {
+            Vector3 normal = Vector3.Cross(vertices[verticesCount + 1] - vertices[verticesCount],
+                vertices[verticesCount + 2] - vertices[verticesCount]);
+            Vector3 grad = GradF(vertices[verticesCount]);
+            if (SurfaceA)
+            {
+                if (Vector3.Dot(normal, grad) > 0f)
+                {
+                    triangles.Add(verticesCount);
+                    triangles.Add(verticesCount + 1);
+                    triangles.Add(verticesCount + 2);
+                }
+                else
+                {
+                    triangles.Add(verticesCount + 2);
+                    triangles.Add(verticesCount + 1);
+                    triangles.Add(verticesCount);
+                }
+            }
+            else
+            {
+                if (Vector3.Dot(normal, grad) < 0f)
+                {
+                    triangles.Add(verticesCount);
+                    triangles.Add(verticesCount + 1);
+                    triangles.Add(verticesCount + 2);
+                }
+                else
+                {
+                    triangles.Add(verticesCount + 2);
+                    triangles.Add(verticesCount + 1);
+                    triangles.Add(verticesCount);
+                }
+            }
+        }
+    }
+
+    void MarchingCube1()
+    {
+        int verticesCount = vertices.Count;
+        float x00 = InnerDivision(x0, x1, f000, f100);
+        float x01 = InnerDivision(x0, x1, f001, f101);
+        float x10 = InnerDivision(x0, x1, f010, f110);
+        float x11 = InnerDivision(x0, x1, f011, f111);
+        float y00 = InnerDivision(y0, y1, f000, f010);
+        float y01 = InnerDivision(y0, y1, f001, f011);
+        float y10 = InnerDivision(y0, y1, f100, f110);
+        float y11 = InnerDivision(y0, y1, f101, f111);
+        float z00 = InnerDivision(z0, z1, f000, f001);
+        float z01 = InnerDivision(z0, z1, f010, f011);
+        float z10 = InnerDivision(z0, z1, f100, f101);
+        float z11 = InnerDivision(z0, z1, f110, f111);
+        int code = 0;
+        if (f000 > 0) code += 128;
+        if (f001 > 0) code += 64;
+        if (f010 > 0) code += 32;
+        if (f011 > 0) code += 16;
+        if (f100 > 0) code += 8;
+        if (f101 > 0) code += 4;
+        if (f110 > 0) code += 2;
+        if (f111 > 0) code += 1;
+        Debug.Log(code);
+
+        switch (code) {
+            case 128:// 1000 0000 // f000
+            case 127:// 0111 1111 // f000
+                vertices.Add(new Vector3(x00, y0, z0));
+                vertices.Add(new Vector3(x0, y00, z0));
+                vertices.Add(new Vector3(x0, y0, z00));
+                break;
+            case 64: //0100 0000 // f001 
+            case 191: //1011 1111 // f001 // 255 - 64 
+                vertices.Add(new Vector3(x01, y0, z1));// f101
+                vertices.Add(new Vector3(x0, y01, z1));// f011
+                vertices.Add(new Vector3(x0, y0, z00));// f000
+                break;
+            case 32: //0010 0000 // f010 
+            case 223: //1101 1111 // f010 
+                vertices.Add(new Vector3(x10, y1, z0));// f110
+                vertices.Add(new Vector3(x0, y00, z0));// f000
+                vertices.Add(new Vector3(x0, y1, z01));// f011
+                break;
+            case 16: //0001 0000 // f011 
+            case 239: //1110 1111 // f011 
+                vertices.Add(new Vector3(x11, y1, z1));// f111
+                vertices.Add(new Vector3(x0, y01, z1));// f001
+                vertices.Add(new Vector3(x0, y1, z01));// f010
+                break;
+            case 8: //0000 1000 // f100 
+            case 247: //1111 0111 // f100 
+                vertices.Add(new Vector3(x00, y0, z0));// f000
+                vertices.Add(new Vector3(x1, y10, z0));// f110
+                vertices.Add(new Vector3(x1, y0, z10));// f101
+                break;
+            case 4: //0000 0100 // f101 
+            case 251: //1111 1011 // f101 
+                vertices.Add(new Vector3(x01, y0, z1));// f001
+                vertices.Add(new Vector3(x1, y11, z1));// f111
+                vertices.Add(new Vector3(x1, y0, z10));// f100
+                break;
+            case 2: //0000 0010 // f110 
+            case 253: //1111 1101 // f110 
+                vertices.Add(new Vector3(x10, y1, z0));// f010
+                vertices.Add(new Vector3(x1, y10, z0));// f100 
+                vertices.Add(new Vector3(x1, y1, z11));// f111
+                break;
+            case 1: //0000 0001 // f111 
+            case 254: //1111 1110 // f111 
+                vertices.Add(new Vector3(x11, y1, z1));// f011
+                vertices.Add(new Vector3(x1, y11, z1));// f101 
+                vertices.Add(new Vector3(x1, y1, z11));// f110
+                break;
+                //case 136:// 1000 1000 // f000 f100
+                //case 119:// 0111 0111 // f000 f100
+                //    vertices.Add(new Vector3(x0, y00, z0));// f000 - f010
+                //    vertices.Add(new Vector3(x0, y0, z00));// f000 - f001
+                //    vertices.Add(new Vector3(x1, y0, z10));// f100 - f101
+                //    vertices.Add(new Vector3(x1, y10, z0));// f100 - f110
+                //    break;
+        }
+        int vCount = vertices.Count - verticesCount;
+        Debug.Log(vCount);
+        if (vCount >= 3)
+        {
+            Vector3 normal = Vector3.Cross(vertices[verticesCount + 1] - vertices[verticesCount],
+            vertices[verticesCount + 2] - vertices[verticesCount]);
+            Vector3 grad = GradF(vertices[verticesCount]);
+            if ((SurfaceA && Vector3.Dot(normal, grad) > 0f) || (!SurfaceA && Vector3.Dot(normal, grad) < 0f))
+            {
+                if (vCount == 3)
+                {
+                    triangles.Add(verticesCount);
+                    triangles.Add(verticesCount + 1);
+                    triangles.Add(verticesCount + 2);
+                }
+                else if (vCount == 4)
+                {
+                    triangles.Add(verticesCount);
+                    triangles.Add(verticesCount + 1);
+                    triangles.Add(verticesCount + 2);
+                    triangles.Add(verticesCount);
+                    triangles.Add(verticesCount + 2);
+                    triangles.Add(verticesCount + 3);
+                }
+            }
+            else
+            {
+                if (vCount == 3)
+                {
+                    triangles.Add(verticesCount + 2);
+                    triangles.Add(verticesCount + 1);
+                    triangles.Add(verticesCount);
+                }
+                else if (vCount == 4)
+                {
+                    triangles.Add(verticesCount + 2);
+                    triangles.Add(verticesCount + 1);
+                    triangles.Add(verticesCount);
+                    triangles.Add(verticesCount + 3);
+                    triangles.Add(verticesCount + 2);
+                    triangles.Add(verticesCount);
+                }
+            }
+        }
+    }
+
 }
