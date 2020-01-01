@@ -738,7 +738,7 @@ MonoBehaviour:
   vertices: []
   triangles: 
   SurfaceA: 1
-  SurfaceMaterial: {fileID: 2100000, guid: 2b6e1db9a26c52044bd95f80ba9c379c, type: 2}
+  SurfaceMaterial: {fileID: 2100000, guid: b5280f15b0044b042881085b6d9b83e4, type: 2}
   CameraRig: {fileID: 0}
   eyeHeight: {x: 0, y: 1, z: 0}
   Line: {fileID: 1924488975}
@@ -923,16 +923,16 @@ MonoBehaviour:
   vertices: []
   triangles: 
   SurfaceA: 0
-  SurfaceMaterial: {fileID: 2100000, guid: 81e41528c46162545aeef7ac865c0019, type: 2}
+  SurfaceMaterial: {fileID: 2100000, guid: 5fdd93edff551f14e8510e619b28f07c, type: 2}
   CameraRig: {fileID: 733892165}
   eyeHeight: {x: 0, y: 1, z: 0}
   Line: {fileID: 1924488975}
   LineNumber: 0
-  startX: 0
+  startX: -2
   endX: 0
-  startY: 0
+  startY: -2
   endY: 0
-  startZ: 0
+  startZ: -2
   endZ: 0
 --- !u!23 &779141404
 MeshRenderer:
