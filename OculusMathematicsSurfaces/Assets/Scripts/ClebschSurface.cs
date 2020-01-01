@@ -632,6 +632,9 @@ public class ClebschSurface : MonoBehaviour
                 VerticesAdd(1, 1, 1, 1, 0, 1);// f101
                 VerticesAdd(1, 1, 1, 1, 1, 0);// f110
                 break;
+            //////////
+            //４角形ここから
+            //////////
             case 0b10001000: // f000 f100
             case 0b01110111: // f000 f100
                 VerticesAdd(0, 0, 0, 0, 1, 0);// f000 - f010
@@ -716,6 +719,293 @@ public class ClebschSurface : MonoBehaviour
                 VerticesAdd(1, 1, 1, 1, 0, 1);// f111 - f101
                 VerticesAdd(1, 1, 1, 0, 1, 1);// f111 - f011
                 break;
+            //////////
+            //4角形パート２
+            //////////
+            case 0b10101010: // 000-100-110-010
+            case 0b01010101:
+                VerticesAdd(0, 0, 0, 0, 0, 1);// f000 - f001
+                VerticesAdd(1, 0, 0, 1, 0, 1);// f100 - f101
+                VerticesAdd(1, 1, 0, 1, 1, 1);// f110 - f111
+                VerticesAdd(0, 1, 0, 0, 1, 1);// f010 - f011
+                break;
+            case 0b11001100: // 000-001-101-100
+            case 0b00110011:
+                VerticesAdd(0, 0, 0, 0, 1, 0);// f000 - f010
+                VerticesAdd(0, 0, 1, 0, 1, 1);// f001 - f011
+                VerticesAdd(1, 0, 1, 1, 1, 1);// f101 - f111
+                VerticesAdd(1, 0, 0, 1, 1, 0);// f100 - f110
+                break;
+            case 0b11110000: // 000-010-011-001
+            case 0b00001111:
+                VerticesAdd(0, 0, 0, 1, 0, 0);// f000 - f100
+                VerticesAdd(0, 1, 0, 1, 1, 0);// f010 - f110
+                VerticesAdd(0, 1, 1, 1, 1, 1);// f011 - f111
+                VerticesAdd(0, 0, 1, 1, 0, 1);// f001 - f101
+                break;
+            //////////
+            //4角形パート３
+            //////////
+            case 0b10000100: //000-101
+            case 0b01111011:
+                VerticesAdd(0, 0, 0, 1, 0, 0);// f000 - f100
+                VerticesAdd(1, 0, 0, 1, 0, 1);// f100 - f101
+                VerticesAdd(1, 0, 1, 0, 0, 1);// f101 - f001
+                VerticesAdd(0, 0, 1, 0, 0, 0);// f001 - f000
+                break;
+            case 0b00010010: //011-110
+            case 0b11101101:
+                VerticesAdd(0, 1, 1, 0, 1, 0);// f011 - f010
+                VerticesAdd(0, 1, 0, 1, 1, 0);// f010 - f110
+                VerticesAdd(1, 1, 0, 1, 1, 1);// f110 - f111
+                VerticesAdd(1, 1, 1, 0, 1, 1);// f111 - f011
+                break;
+            //////////
+            //5角形ここから
+            //////////
+            case 0b10101000: // 100-000-010
+            case 0b01010111: // 
+                VerticesAdd(1, 0, 0, 1, 1, 0);// f100 - f110
+                VerticesAdd(1, 0, 0, 1, 0, 1);// f100 - f101
+                VerticesAdd(0, 0, 0, 0, 0, 1);// f000 - f001
+                VerticesAdd(0, 1, 0, 0, 1, 1);// f010 - f011
+                VerticesAdd(0, 1, 0, 1, 1, 0);// f010 - f110
+                break;
+            case 0b10100010: // 000-010-110
+            case 0b01011101: // 
+                VerticesAdd(0, 0, 0, 1, 0, 0);// f000 - f100
+                VerticesAdd(0, 0, 0, 0, 0, 1);// f000 - f001
+                VerticesAdd(0, 1, 0, 0, 1, 1);// f010 - f011
+                VerticesAdd(1, 1, 0, 1, 1, 1);// f110 - f111
+                VerticesAdd(1, 1, 0, 1, 0, 0);// f110 - f100
+                break;
+            case 0b10001010: // 000-100-110
+            case 0b01110101: // 
+                VerticesAdd(0, 0, 0, 0, 1, 0);// f000 - f010
+                VerticesAdd(0, 0, 0, 0, 0, 1);// f000 - f001
+                VerticesAdd(1, 0, 0, 1, 0, 1);// f100 - f101
+                VerticesAdd(1, 1, 0, 1, 1, 1);// f110 - f111
+                VerticesAdd(1, 1, 0, 0, 1, 0);// f110 - f010
+                break;
+            case 0b00101010: // 100-110-010
+            case 0b11010101: // 
+                VerticesAdd(1, 0, 0, 0, 0, 0);// f100 - f000
+                VerticesAdd(1, 0, 0, 1, 0, 1);// f100 - f101
+                VerticesAdd(1, 1, 0, 1, 1, 1);// f110 - f111
+                VerticesAdd(0, 1, 0, 0, 1, 1);// f010 - f011
+                VerticesAdd(0, 1, 0, 0, 0, 0);// f010 - f000
+                break;
+            ///////
+            case 0b01010100: // 101-001-011
+            case 0b10101011: // 
+                VerticesAdd(1, 0, 1, 1, 1, 1);// f101 - f111
+                VerticesAdd(1, 0, 1, 1, 0, 0);// f101 - f100
+                VerticesAdd(0, 0, 1, 0, 0, 0);// f001 - f000
+                VerticesAdd(0, 1, 1, 0, 1, 0);// f011 - f010
+                VerticesAdd(0, 1, 1, 1, 1, 1);// f011 - f111
+                break;
+            case 0b01010001: // 001-011-111
+            case 0b10101110: // 
+                VerticesAdd(0, 0, 1, 1, 0, 1);// f001 - f101
+                VerticesAdd(0, 0, 1, 0, 0, 0);// f001 - f000
+                VerticesAdd(0, 1, 1, 0, 1, 0);// f011 - f010
+                VerticesAdd(1, 1, 1, 1, 1, 0);// f111 - f110
+                VerticesAdd(1, 1, 1, 1, 0, 1);// f111 - f101
+                break;
+            case 0b01000101: // 001-101-111
+            case 0b10111010: // 
+                VerticesAdd(0, 0, 1, 0, 1, 1);// f001 - f011
+                VerticesAdd(0, 0, 1, 0, 0, 0);// f001 - f000
+                VerticesAdd(1, 0, 1, 1, 0, 0);// f101 - f100
+                VerticesAdd(1, 1, 1, 1, 1, 0);// f111 - f110
+                VerticesAdd(1, 1, 1, 0, 1, 1);// f111 - f011
+                break;
+            case 0b00010101: // 101-111-011
+            case 0b11101010: // 
+                VerticesAdd(1, 0, 1, 0, 0, 1);// f101 - f001
+                VerticesAdd(1, 0, 1, 1, 0, 0);// f101 - f100
+                VerticesAdd(1, 1, 1, 1, 1, 0);// f111 - f110
+                VerticesAdd(0, 1, 1, 0, 1, 0);// f011 - f010
+                VerticesAdd(0, 1, 1, 0, 0, 1);// f011 - f001
+                break;
+            /////////
+            case 0b11001000: // 001-000-100
+            case 0b00110111: // 
+                VerticesAdd(0, 0, 1, 1, 0, 1);// f001 - f101
+                VerticesAdd(0, 0, 1, 0, 1, 1);// f001 - f011
+                VerticesAdd(0, 0, 0, 0, 1, 0);// f000 - f010
+                VerticesAdd(1, 0, 0, 1, 1, 0);// f100 - f110
+                VerticesAdd(1, 0, 0, 1, 0, 1);// f100 - f101
+                break;
+            case 0b10001100: // 000-100-101
+            case 0b01110011: // 
+                VerticesAdd(0, 0, 0, 0, 0, 1);// f000 - f001
+                VerticesAdd(0, 0, 0, 0, 1, 0);// f000 - f010
+                VerticesAdd(1, 0, 0, 1, 1, 0);// f100 - f110
+                VerticesAdd(1, 0, 1, 1, 1, 1);// f101 - f111
+                VerticesAdd(1, 0, 1, 0, 0, 1);// f101 - f001
+                break;
+            case 0b11000100: // 000-001-101
+            case 0b00111011: // 
+                VerticesAdd(0, 0, 0, 1, 0, 0);// f000 - f100
+                VerticesAdd(0, 0, 0, 0, 1, 0);// f000 - f010
+                VerticesAdd(0, 0, 1, 0, 1, 1);// f001 - f011
+                VerticesAdd(1, 0, 1, 1, 1, 1);// f101 - f111
+                VerticesAdd(1, 0, 1, 1, 0, 0);// f101 - f100
+                break;
+            case 0b01001100: // 001-101-100
+            case 0b10110011: // 
+                VerticesAdd(0, 0, 1, 0, 0, 0);// f001 - f000
+                VerticesAdd(0, 0, 1, 0, 1, 1);// f001 - f011
+                VerticesAdd(1, 0, 1, 1, 1, 1);// f101 - f111
+                VerticesAdd(1, 0, 0, 1, 1, 0);// f100 - f110
+                VerticesAdd(1, 0, 0, 0, 0, 0);// f100 - f000
+                break;
+            ////
+            case 0b00110010: // 011-010-110
+            case 0b11001101: // 
+                VerticesAdd(0, 1, 1, 1, 1, 1);// f011 - f111
+                VerticesAdd(0, 1, 1, 0, 0, 1);// f011 - f001
+                VerticesAdd(0, 1, 0, 0, 0, 0);// f010 - f000
+                VerticesAdd(1, 1, 0, 1, 0, 0);// f110 - f100
+                VerticesAdd(1, 1, 0, 1, 1, 1);// f110 - f111
+                break;
+            case 0b00100011: // 010-110-111
+            case 0b11011100: // 
+                VerticesAdd(0, 1, 0, 0, 1, 1);// f010 - f011
+                VerticesAdd(0, 1, 0, 0, 0, 0);// f010 - f000
+                VerticesAdd(1, 1, 0, 1, 0, 0);// f110 - f100
+                VerticesAdd(1, 1, 1, 1, 0, 1);// f111 - f101
+                VerticesAdd(1, 1, 1, 0, 1, 1);// f111 - f011
+                break;
+            case 0b00110001: // 010-011-111
+            case 0b11001110: // 
+                VerticesAdd(0, 1, 0, 1, 1, 0);// f010 - f110
+                VerticesAdd(0, 1, 0, 0, 0, 0);// f010 - f000
+                VerticesAdd(0, 1, 1, 0, 0, 1);// f011 - f001
+                VerticesAdd(1, 1, 1, 1, 0, 1);// f111 - f101
+                VerticesAdd(1, 1, 1, 1, 1, 0);// f111 - f110
+                break;
+            case 0b00010011: // 011-111-110
+            case 0b11101100: // 
+                VerticesAdd(0, 1, 1, 0, 1, 0);// f011 - f010
+                VerticesAdd(0, 1, 1, 0, 0, 1);// f011 - f001
+                VerticesAdd(1, 1, 1, 1, 0, 1);// f111 - f101
+                VerticesAdd(1, 1, 0, 1, 0, 0);// f110 - f100
+                VerticesAdd(1, 1, 0, 0, 1, 0);// f110 - f010
+                break;
+            ////
+            case 0b11100000: // 010-000-001
+            case 0b00011111: // 
+                VerticesAdd(0, 1, 0, 0, 1, 1);// f010 - f011
+                VerticesAdd(0, 1, 0, 1, 1, 0);// f010 - f110
+                VerticesAdd(0, 0, 0, 1, 0, 0);// f000 - f100
+                VerticesAdd(0, 0, 1, 1, 0, 1);// f001 - f101
+                VerticesAdd(0, 0, 1, 0, 1, 1);// f001 - f011
+                break;
+            case 0b11010000: // 011-001-000
+            case 0b00101111: // 
+                VerticesAdd(0, 1, 1, 0, 1, 0);// f011 - f010
+                VerticesAdd(0, 1, 1, 1, 1, 1);// f011 - f111
+                VerticesAdd(0, 0, 1, 1, 0, 1);// f001 - f101
+                VerticesAdd(0, 0, 0, 1, 0, 0);// f000 - f100
+                VerticesAdd(0, 0, 0, 0, 1, 0);// f000 - f010
+                break;
+            case 0b10110000: // 000-010-011
+            case 0b01001111: // 
+                VerticesAdd(0, 0, 0, 0, 0, 1);// f000 - f001
+                VerticesAdd(0, 0, 0, 1, 0, 0);// f000 - f100
+                VerticesAdd(0, 1, 0, 1, 1, 0);// f010 - f110
+                VerticesAdd(0, 1, 1, 1, 1, 1);// f011 - f111
+                VerticesAdd(0, 1, 1, 0, 0, 1);// f011 - f001
+                break;
+            case 0b01110000: // 001-011-010
+            case 0b10001111: // 
+                VerticesAdd(0, 0, 1, 0, 0, 0);// f001 - f000
+                VerticesAdd(0, 0, 1, 1, 0, 1);// f001 - f101
+                VerticesAdd(0, 1, 1, 1, 1, 1);// f011 - f111
+                VerticesAdd(0, 1, 0, 1, 1, 0);// f010 - f110
+                VerticesAdd(0, 1, 0, 0, 0, 0);// f010 - f000
+                break;
+            ////
+            case 0b00001110: // 110-100-101
+            case 0b11110001: // 
+                VerticesAdd(1, 1, 0, 1, 1, 1);// f110 - f111
+                VerticesAdd(1, 1, 0, 0, 1, 0);// f110 - f010
+                VerticesAdd(1, 0, 0, 0, 0, 0);// f100 - f000
+                VerticesAdd(1, 0, 1, 0, 0, 1);// f101 - f001
+                VerticesAdd(1, 0, 1, 1, 1, 1);// f101 - f111
+                break;
+            case 0b00001101: // 111-101-100
+            case 0b11110010: // 
+                VerticesAdd(1, 1, 1, 1, 1, 0);// f111 - f110
+                VerticesAdd(1, 1, 1, 0, 1, 1);// f111 - f011
+                VerticesAdd(1, 0, 1, 0, 0, 1);// f101 - f001
+                VerticesAdd(1, 0, 0, 0, 0, 0);// f100 - f000
+                VerticesAdd(1, 0, 0, 1, 1, 0);// f100 - f110
+                break;
+            case 0b00001011: // 100-110-111
+            case 0b11110100: // 
+                VerticesAdd(1, 0, 0, 1, 0, 1);// f100 - f101
+                VerticesAdd(1, 0, 0, 0, 0, 0);// f100 - f000
+                VerticesAdd(1, 1, 0, 0, 1, 0);// f110 - f010
+                VerticesAdd(1, 1, 1, 0, 1, 1);// f111 - f011
+                VerticesAdd(1, 1, 1, 1, 0, 1);// f111 - f101
+                break;
+            case 0b00000111: // 101-111-110
+            case 0b11111000: // 
+                VerticesAdd(1, 0, 1, 1, 0, 0);// f101 - f100
+                VerticesAdd(1, 0, 1, 0, 0, 1);// f101 - f001
+                VerticesAdd(1, 1, 1, 0, 1, 1);// f111 - f011
+                VerticesAdd(1, 1, 0, 0, 1, 0);// f110 - f010
+                VerticesAdd(1, 1, 0, 1, 0, 0);// f110 - f100
+                break;
+            //////////
+            //5角形パート２ある？
+            //////////
+            //////////
+            //６角形ここから
+            //////////
+            case 0b11101000: // 000-(100,010,001)
+            case 0b00010111:
+                VerticesAdd(1, 0, 0, 1, 0, 1);// f100 - f101
+                VerticesAdd(1, 0, 1, 0, 0, 1);// f101 - f001
+                VerticesAdd(0, 0, 1, 0, 1, 1);// f001 - f011
+                VerticesAdd(0, 1, 1, 0, 1, 0);// f011 - f010
+                VerticesAdd(0, 1, 0, 1, 1, 0);// f010 - f110
+                VerticesAdd(1, 1, 0, 1, 0, 0);// f110 - f100
+                break;
+            case 0b11010100: // 001-(101,011,000)
+            case 0b00101011:
+                VerticesAdd(1, 0, 1, 1, 1, 1);// f101 - f111
+                VerticesAdd(1, 1, 1, 0, 1, 1);// f111 - f011
+                VerticesAdd(0, 1, 1, 0, 1, 0);// f011 - f010
+                VerticesAdd(0, 1, 0, 0, 0, 0);// f010 - f000
+                VerticesAdd(0, 0, 0, 1, 0, 0);// f000 - f100
+                VerticesAdd(1, 0, 0, 1, 0, 1);// f100 - f101
+                break;
+            case 0b10110010: // 010-(110,000,011)
+            case 0b01001101:
+                VerticesAdd(1, 1, 0, 1, 1, 1);// f110 - f111
+                VerticesAdd(1, 1, 1, 0, 1, 1);// f111 - f011
+                VerticesAdd(0, 1, 1, 0, 0, 1);// f011 - f001
+                VerticesAdd(0, 0, 1, 0, 0, 0);// f001 - f000
+                VerticesAdd(0, 0, 0, 1, 0, 0);// f000 - f100
+                VerticesAdd(1, 0, 0, 1, 1, 0);// f100 - f110
+                break;
+            case 0b01110001: // 011-(111,001,010)
+            case 0b10001110:
+                VerticesAdd(1, 1, 1, 1, 0, 1);// f111 - f101
+                VerticesAdd(1, 0, 1, 0, 0, 1);// f101 - f001
+                VerticesAdd(0, 0, 1, 0, 0, 0);// f001 - f000
+                VerticesAdd(0, 0, 0, 0, 1, 0);// f000 - f010
+                VerticesAdd(0, 1, 0, 1, 1, 0);// f010 - f110
+                VerticesAdd(1, 1, 0, 1, 1, 1);// f110 - f111
+                break;
+            default:
+                if(code!=0 && code!=255)
+                    Debug.Log(code);
+                break;
         }
         int vCount = vertices.Count - verticesCount;
         //Debug.Log(vCount);
@@ -741,6 +1031,33 @@ public class ClebschSurface : MonoBehaviour
                     triangles.Add(verticesCount + 2);
                     triangles.Add(verticesCount + 3);
                 }
+                else if (vCount == 5)
+                {
+                    triangles.Add(verticesCount);
+                    triangles.Add(verticesCount + 1);
+                    triangles.Add(verticesCount + 2);
+                    triangles.Add(verticesCount);
+                    triangles.Add(verticesCount + 2);
+                    triangles.Add(verticesCount + 3);
+                    triangles.Add(verticesCount);
+                    triangles.Add(verticesCount + 3);
+                    triangles.Add(verticesCount + 4);
+                }
+                else if (vCount == 6)
+                {
+                    triangles.Add(verticesCount);
+                    triangles.Add(verticesCount + 1);
+                    triangles.Add(verticesCount + 2);
+                    triangles.Add(verticesCount);
+                    triangles.Add(verticesCount + 2);
+                    triangles.Add(verticesCount + 3);
+                    triangles.Add(verticesCount);
+                    triangles.Add(verticesCount + 3);
+                    triangles.Add(verticesCount + 4);
+                    triangles.Add(verticesCount);
+                    triangles.Add(verticesCount + 4);
+                    triangles.Add(verticesCount + 5);
+                }
             }
             else
             {
@@ -757,6 +1074,33 @@ public class ClebschSurface : MonoBehaviour
                     triangles.Add(verticesCount);
                     triangles.Add(verticesCount + 3);
                     triangles.Add(verticesCount + 2);
+                    triangles.Add(verticesCount);
+                }
+                else if (vCount == 5)
+                {
+                    triangles.Add(verticesCount + 2);
+                    triangles.Add(verticesCount + 1);
+                    triangles.Add(verticesCount);
+                    triangles.Add(verticesCount + 3);
+                    triangles.Add(verticesCount + 2);
+                    triangles.Add(verticesCount);
+                    triangles.Add(verticesCount + 4);
+                    triangles.Add(verticesCount + 3);
+                    triangles.Add(verticesCount);
+                }
+                else if (vCount == 6)
+                {
+                    triangles.Add(verticesCount + 2);
+                    triangles.Add(verticesCount + 1);
+                    triangles.Add(verticesCount);
+                    triangles.Add(verticesCount + 3);
+                    triangles.Add(verticesCount + 2);
+                    triangles.Add(verticesCount);
+                    triangles.Add(verticesCount + 4);
+                    triangles.Add(verticesCount + 3);
+                    triangles.Add(verticesCount);
+                    triangles.Add(verticesCount + 5);
+                    triangles.Add(verticesCount + 4);
                     triangles.Add(verticesCount);
                 }
             }
