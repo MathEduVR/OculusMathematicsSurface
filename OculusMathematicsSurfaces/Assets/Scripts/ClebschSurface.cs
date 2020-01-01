@@ -30,6 +30,7 @@ public class ClebschSurface : MonoBehaviour
     private float x0, y0, z0;
     private float x1, y1, z1;
 
+    public float startX, endX, startY, endY, startZ, endZ;
 
     float InnerDivision(float x1, float x2, float rate1, float rate2)
     {
@@ -60,13 +61,13 @@ public class ClebschSurface : MonoBehaviour
 
         mesh = new Mesh();
 
-        for (x0 = -border; x0 <= border; x0 += step)
+        for (x0 = startX; x0 <= endX; x0 += step)
         {
             x1 = x0 + step;
-            for (y0 = -border; y0 <= border; y0 += step)
+            for (y0 = startY; y0 <= endY; y0 += step)
             {
                 y1 = y0 + step;
-                for (z0 = -border; z0 <= border; z0 += step)
+                for (z0 = startZ; z0 <= endZ; z0 += step)
                 {
                     z1 = z0 + step;
                     f000 = F(x0, y0, z0);
@@ -77,7 +78,7 @@ public class ClebschSurface : MonoBehaviour
                     f101 = F(x1, y0, z1);
                     f110 = F(x1, y1, z0);
                     f111 = F(x1, y1, z1);
-                    MarchingCube0();
+                    MarchingCube1();
                 }
             }
         }
@@ -580,67 +581,144 @@ public class ClebschSurface : MonoBehaviour
         if (f101 > 0) code += 4;
         if (f110 > 0) code += 2;
         if (f111 > 0) code += 1;
-        Debug.Log(code);
+        //Debug.Log(code);
 
         switch (code) {
-            case 128:// 1000 0000 // f000
-            case 127:// 0111 1111 // f000
-                vertices.Add(new Vector3(x00, y0, z0));
-                vertices.Add(new Vector3(x0, y00, z0));
-                vertices.Add(new Vector3(x0, y0, z00));
+            case 0b10000000: // f000
+            case 0b01111111: // f000
+                VerticesAdd(0, 0, 0, 1, 0, 0);
+                VerticesAdd(0, 0, 0, 0, 1, 0);
+                VerticesAdd(0, 0, 0, 0, 0, 1);
                 break;
-            case 64: //0100 0000 // f001 
-            case 191: //1011 1111 // f001 // 255 - 64 
-                vertices.Add(new Vector3(x01, y0, z1));// f101
-                vertices.Add(new Vector3(x0, y01, z1));// f011
-                vertices.Add(new Vector3(x0, y0, z00));// f000
+            case 0b01000000: // f001 
+            case 0b10111111: // f001  
+                VerticesAdd(0, 0, 1, 1, 0, 1); ;// f001 - f101
+                VerticesAdd(0, 0, 1, 0, 1, 1); ;// f001 - f101
+                VerticesAdd(0, 0, 1, 0, 0, 0); ;// f001 - f101
                 break;
-            case 32: //0010 0000 // f010 
-            case 223: //1101 1111 // f010 
-                vertices.Add(new Vector3(x10, y1, z0));// f110
-                vertices.Add(new Vector3(x0, y00, z0));// f000
-                vertices.Add(new Vector3(x0, y1, z01));// f011
+            case 0b00100000: // f010 
+            case 0b11011111: // f010 
+                VerticesAdd(0, 1, 0, 1, 1, 0);// f110
+                VerticesAdd(0, 1, 0, 0, 0, 0);// f000
+                VerticesAdd(0, 1, 0, 0, 1, 1);// f011
                 break;
-            case 16: //0001 0000 // f011 
-            case 239: //1110 1111 // f011 
-                vertices.Add(new Vector3(x11, y1, z1));// f111
-                vertices.Add(new Vector3(x0, y01, z1));// f001
-                vertices.Add(new Vector3(x0, y1, z01));// f010
+            case 0b00010000: // f011 
+            case 0b11101111: // f011 
+                VerticesAdd(0, 1, 1, 1, 1, 1); // f111
+                VerticesAdd(0, 1, 1, 0, 0, 1);// f001
+                VerticesAdd(0, 1, 1, 0, 1, 0);// f010
                 break;
-            case 8: //0000 1000 // f100 
-            case 247: //1111 0111 // f100 
-                vertices.Add(new Vector3(x00, y0, z0));// f000
-                vertices.Add(new Vector3(x1, y10, z0));// f110
-                vertices.Add(new Vector3(x1, y0, z10));// f101
+            case 0b00001000: // f100 
+            case 0b11110111:  // f100 
+                VerticesAdd(1, 0, 0, 0, 0, 0);// f000
+                VerticesAdd(1, 0, 0, 1, 1, 0);// f110
+                VerticesAdd(1, 0, 0, 1, 0, 1);// f101
                 break;
-            case 4: //0000 0100 // f101 
-            case 251: //1111 1011 // f101 
-                vertices.Add(new Vector3(x01, y0, z1));// f001
-                vertices.Add(new Vector3(x1, y11, z1));// f111
-                vertices.Add(new Vector3(x1, y0, z10));// f100
+            case 0b00000100: // f101 
+            case 0b11111011: // f101 
+                VerticesAdd(1, 0, 1, 0, 0, 1);// f001
+                VerticesAdd(1, 0, 1, 1, 1, 1);// f111
+                VerticesAdd(1, 0, 1, 1, 0, 0);// f100
                 break;
-            case 2: //0000 0010 // f110 
-            case 253: //1111 1101 // f110 
-                vertices.Add(new Vector3(x10, y1, z0));// f010
-                vertices.Add(new Vector3(x1, y10, z0));// f100 
-                vertices.Add(new Vector3(x1, y1, z11));// f111
+            case 0b00000010: // f110 
+            case 0b11111101: // f110 
+                VerticesAdd(1, 1, 0, 0, 1, 0);// f010
+                VerticesAdd(1, 1, 0, 1, 0, 0);// f100
+                VerticesAdd(1, 1, 0, 1, 1, 1);// f111
                 break;
-            case 1: //0000 0001 // f111 
-            case 254: //1111 1110 // f111 
-                vertices.Add(new Vector3(x11, y1, z1));// f011
-                vertices.Add(new Vector3(x1, y11, z1));// f101 
-                vertices.Add(new Vector3(x1, y1, z11));// f110
+            case 0b00000001: // f111 
+            case 0b11111110: // f111 
+                VerticesAdd(1, 1, 1, 0, 1, 1);// f011
+                VerticesAdd(1, 1, 1, 1, 0, 1);// f101
+                VerticesAdd(1, 1, 1, 1, 1, 0);// f110
                 break;
-                //case 136:// 1000 1000 // f000 f100
-                //case 119:// 0111 0111 // f000 f100
-                //    vertices.Add(new Vector3(x0, y00, z0));// f000 - f010
-                //    vertices.Add(new Vector3(x0, y0, z00));// f000 - f001
-                //    vertices.Add(new Vector3(x1, y0, z10));// f100 - f101
-                //    vertices.Add(new Vector3(x1, y10, z0));// f100 - f110
-                //    break;
+            case 0b10001000: // f000 f100
+            case 0b01110111: // f000 f100
+                VerticesAdd(0, 0, 0, 0, 1, 0);// f000 - f010
+                VerticesAdd(0, 0, 0, 0, 0, 1);// f000 - f001
+                VerticesAdd(1, 0, 0, 1, 0, 1);// f100 - f101
+                VerticesAdd(1, 0, 0, 1, 1, 0);// f100 - f110
+                break;
+            case 0b00100010: // f010 f110
+            case 0b11011101: // f010 f110
+                VerticesAdd(0, 1, 0, 0, 0, 0);// f010 - f000
+                VerticesAdd(0, 1, 0, 0, 1, 1);// f010 - f011
+                VerticesAdd(1, 1, 0, 1, 1, 1);// f110 - f111
+                VerticesAdd(1, 1, 0, 1, 0, 0);// f110 - f100
+                break;
+            case 0b01000100: // f001 f101 
+            case 0b10111011: // f001 f101
+                VerticesAdd(0, 0, 1, 0, 1, 1);// f001 - f011
+                VerticesAdd(0, 0, 1, 0, 0, 0);// f001 - f000
+                VerticesAdd(1, 0, 1, 1, 0, 0);// f101 - f100
+                VerticesAdd(1, 0, 1, 1, 1, 1);// f101 - f111
+                break;
+            case 0b00010001: // f011 f111 
+            case 0b11101110: // f011 f111
+                VerticesAdd(0, 1, 1, 0, 0, 1);// f011 - f001 
+                VerticesAdd(0, 1, 1, 0, 1, 0);// f011 - f010
+                VerticesAdd(1, 1, 1, 1, 1, 0);// f111 - f110
+                VerticesAdd(1, 1, 1, 1, 0, 1);// f111 - f101
+                break;
+            case 0b10100000: // f000 f010
+            case 0b01011111: // f000 f010
+                VerticesAdd(0, 0, 0, 1, 0, 0);// f000 - f100
+                VerticesAdd(0, 0, 0, 0, 0, 1);// f000 - f001
+                VerticesAdd(0, 1, 0, 0, 1, 1);// f010 - f011
+                VerticesAdd(0, 1, 0, 1, 1, 0);// f010 - f110
+                break;
+            case 0b01010000: // f001 f011
+            case 0b10101111: // f001 f011
+                VerticesAdd(0, 0, 1, 1, 0, 1);// f001 - f101
+                VerticesAdd(0, 0, 1, 0, 0, 0);// f001 - f000
+                VerticesAdd(0, 1, 1, 0, 1, 0);// f011 - f010
+                VerticesAdd(0, 1, 1, 1, 1, 1);// f011 - f111
+                break;
+            case 0b00001010: // f100 f110
+            case 0b11110101: // f100 f110
+                VerticesAdd(1, 0, 0, 0, 0, 0);// f100 - f000
+                VerticesAdd(1, 0, 0, 1, 0, 1);// f100 - f101
+                VerticesAdd(1, 1, 0, 1, 1, 1);// f110 - f111
+                VerticesAdd(1, 1, 0, 0, 1, 0);// f110 - f010
+                break;
+            case 0b00000101: // f101 f111
+            case 0b11111010: // f101 f111
+                VerticesAdd(1, 0, 1, 0, 0, 1);// f101 - f001
+                VerticesAdd(1, 0, 1, 1, 0, 0);// f101 - f100
+                VerticesAdd(1, 1, 1, 1, 1, 0);// f111 - f110
+                VerticesAdd(1, 1, 1, 0, 1, 1);// f111 - f011
+                break;
+            case 0b11000000: // f000 f001
+            case 0b00111111: // f000 f001
+                VerticesAdd(0, 0, 0, 1, 0, 0);// f000 - f100
+                VerticesAdd(0, 0, 0, 0, 1, 0);// f000 - f010
+                VerticesAdd(0, 0, 1, 0, 1, 1);// f001 - f011
+                VerticesAdd(0, 0, 1, 1, 0, 1);// f001 - f101
+                break;
+            case 0b00110000: // f010 f011
+            case 0b11001111: // f010 f011
+                VerticesAdd(0, 1, 0, 1, 1, 0);// f010 - f110
+                VerticesAdd(0, 1, 0, 0, 0, 0);// f010 - f000
+                VerticesAdd(0, 1, 1, 0, 0, 1);// f011 - f001
+                VerticesAdd(0, 1, 1, 1, 1, 1);// f011 - f111
+                break;
+            case 0b00001100: // f100 f101
+            case 0b11110011: // f100 f101
+                VerticesAdd(1, 0, 0, 0, 0, 0);// f100 - f000
+                VerticesAdd(1, 0, 0, 1, 1, 0);// f100 - f110
+                VerticesAdd(1, 0, 1, 1, 1, 1);// f101 - f111
+                VerticesAdd(1, 0, 1, 0, 0, 1);// f101 - f001
+                break;
+            case 0b00000011: // f110 f111
+            case 0b11111100: // f110 f111
+                VerticesAdd(1, 1, 0, 0, 1, 0);// f110 - f010
+                VerticesAdd(1, 1, 0, 1, 0, 0);// f110 - f100
+                VerticesAdd(1, 1, 1, 1, 0, 1);// f111 - f101
+                VerticesAdd(1, 1, 1, 0, 1, 1);// f111 - f011
+                break;
         }
         int vCount = vertices.Count - verticesCount;
-        Debug.Log(vCount);
+        //Debug.Log(vCount);
         if (vCount >= 3)
         {
             Vector3 normal = Vector3.Cross(vertices[verticesCount + 1] - vertices[verticesCount],
@@ -682,6 +760,75 @@ public class ClebschSurface : MonoBehaviour
                     triangles.Add(verticesCount);
                 }
             }
+        }
+    }
+
+    void VerticesAdd(int fx,int fy, int fz, int gx, int gy, int gz)
+    {
+        int code = 32 * fx + 16 * fy + 8 * fz + 4 * gx + 2 * gy + gz;
+        switch (code)
+        {
+            case 0b000100:
+            case 0b100000:
+                float x00 = InnerDivision(x0, x1, f000, f100); 
+                vertices.Add(new Vector3(x00, y0, z0));// f000 - f100
+                break;
+            case 0b001101:
+            case 0b101001:
+                float x01 = InnerDivision(x0, x1, f001, f101);
+                vertices.Add(new Vector3(x01, y0, z1));// f001 - f101
+                break;
+            case 0b010110:
+            case 0b110010:
+                float x10 = InnerDivision(x0, x1, f010, f110);
+                vertices.Add(new Vector3(x10, y1, z0));// f010 - f110
+                break;
+            case 0b011111:
+            case 0b111011:
+                float x11 = InnerDivision(x0, x1, f011, f111);
+                vertices.Add(new Vector3(x11, y1, z1));// f011 - f111
+                break;
+            case 0b000010:
+            case 0b010000:
+                float y00 = InnerDivision(y0, y1, f000, f010);
+                vertices.Add(new Vector3(x0, y00, z0));// f000 - f010
+                break;
+            case 0b001011:
+            case 0b011001:
+                float y01 = InnerDivision(y0, y1, f001, f011);
+                vertices.Add(new Vector3(x0, y01, z1));// f001 - f011
+                break;
+            case 0b100110:
+            case 0b110100:
+                float y10 = InnerDivision(y0, y1, f100, f110);
+                vertices.Add(new Vector3(x1, y10, z0));// f100 - f110
+                break;
+            case 0b101111:
+            case 0b111101:
+                float y11 = InnerDivision(y0, y1, f101, f111);
+                vertices.Add(new Vector3(x1, y11, z1));// f101 - f111
+                break;
+            case 0b000001:
+            case 0b001000:
+                float z00 = InnerDivision(z0, z1, f000, f001);
+                vertices.Add(new Vector3(x0, y0, z00));// f000 - f001
+                break;
+            case 0b010011:
+            case 0b011010:
+                float z01 = InnerDivision(z0, z1, f010, f011);
+                vertices.Add(new Vector3(x0, y1, z01));// f010 - f011
+                break;
+            case 0b100101:
+            case 0b101100:
+                float z10 = InnerDivision(z0, z1, f100, f101);
+                vertices.Add(new Vector3(x1, y0, z10));// f100 - f101
+                break;
+            case 0b110111:
+            case 0b111110:
+                float z11 = InnerDivision(z0, z1, f110, f111);
+                vertices.Add(new Vector3(x1, y1, z11));// f110 - f111
+                break;
+
         }
     }
 
