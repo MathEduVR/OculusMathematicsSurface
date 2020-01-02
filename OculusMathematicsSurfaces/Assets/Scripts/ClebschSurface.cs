@@ -14,7 +14,7 @@ public class ClebschSurface : MonoBehaviour
     public List<Vector3> vertices;
     public List<int> triangles;
     float scale = 1f;
-    float step = 0.02f;
+    //float step = 0.02f;
 
     public bool SurfaceA;
     Mesh mesh;
@@ -89,6 +89,11 @@ public class ClebschSurface : MonoBehaviour
                     f101 = F(x1, y0, z1);
                     f110 = F(x1, y1, z0);
                     f111 = F(x1, y1, z1);
+                    if (xx == 41 && yy == 16 && zz == 39)
+                    {
+                        Debug.Log(f000 + "," + f001 + "," + f010 + "," + f011 + "," + f100 + "," + f101 + "," + f110 + "," + f111);
+                    }
+
                     MC.SetF(f000, f001, f010, f011, f100, f101, f110, f111);
                     MC.SetXYZ(x0, y0, z0, x1, y1, z1);
                     int verticesCount = vertices.Count;
@@ -139,8 +144,8 @@ public class ClebschSurface : MonoBehaviour
                                 triangles.Add(verticesCount + 3);
                                 triangles.Add(verticesCount);
                                 triangles.Add(verticesCount + 3);
-                                triangles.Add(verticesCount + 4);
-                                triangles.Add(verticesCount);
+                                triangles.Add(verticesCount + 5);
+                                triangles.Add(verticesCount + 3);
                                 triangles.Add(verticesCount + 4);
                                 triangles.Add(verticesCount + 5);
                             }
@@ -182,12 +187,12 @@ public class ClebschSurface : MonoBehaviour
                                 triangles.Add(verticesCount + 3);
                                 triangles.Add(verticesCount + 2);
                                 triangles.Add(verticesCount);
-                                triangles.Add(verticesCount + 4);
+                                triangles.Add(verticesCount + 5);
                                 triangles.Add(verticesCount + 3);
                                 triangles.Add(verticesCount);
                                 triangles.Add(verticesCount + 5);
                                 triangles.Add(verticesCount + 4);
-                                triangles.Add(verticesCount);
+                                triangles.Add(verticesCount + 3);
                             }
                         }
                     }

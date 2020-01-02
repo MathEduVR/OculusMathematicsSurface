@@ -21,8 +21,9 @@ public class FakeGyroid : MonoBehaviour
 
 //    public GameObject CameraRig;
 
-
     public float minX = -1f, maxX = 1f, minY = -1f, maxY = 1f, minZ = -1f, maxZ = 1f;
+
+    MarchingCube MC;
 
     float InnerDivision(float x1, float x2, float rate1, float rate2)
     {
@@ -33,7 +34,7 @@ public class FakeGyroid : MonoBehaviour
 
     void Start()
     {
-
+        MC = new MarchingCube();
         //GameObject[] objs = FindObjectsOfType<GameObject>();
         //for (int i = 0; i < objs.Length; i++)
         //{
@@ -52,16 +53,21 @@ public class FakeGyroid : MonoBehaviour
 
 
         mesh = new Mesh();
+        MC.SetList(vertices);
 
-        for (float x0 = minX; x0 <= maxX; x0 += stepX)
+        float Delta = 0.01f;
+        for (int xx = 0; xx < 20; xx++)
         {
-            float x1 = x0 + stepX;
-            for (float y0 = minY; y0 <= maxY; y0 += stepY)
+            float x0 = minX + stepX * xx + Delta;
+            float x1 = minX + stepX * (xx+1) + Delta;
+            for (int yy = 0; yy < 20; yy++)
             {
-                float y1 = y0 + stepY;
-                for (float z0 = minZ; z0 <= maxZ; z0 += stepZ)
+                float y0 = minY + stepY * yy + Delta;
+                float y1 = minY + stepY * (yy+1) + Delta;
+                for (int zz=0; zz<20; zz++)
                 {
-                    float z1 = z0 + stepZ;
+                    float z0 = minZ + stepZ * zz + Delta;
+                    float z1 = minZ + stepZ * (zz+1) + Delta;
                     float f000 = F(x0, y0, z0);
                     float f001 = F(x0, y0, z1);
                     float f010 = F(x0, y1, z0);
@@ -70,157 +76,113 @@ public class FakeGyroid : MonoBehaviour
                     float f101 = F(x1, y0, z1);
                     float f110 = F(x1, y1, z0);
                     float f111 = F(x1, y1, z1);
-                    int verticesCount = vertices.Count;
+                    if(xx==0 && yy==9 && zz == 10)
+                    {
+                        Debug.Log(f000 + "," + f001 + "," + f010 + "," + f011 + "," + f100 + "," + f101 + "," + f110 + "," + f111);
+                    }
                     int count = 0;
-                    if (f000 * f001 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            x0,
-                            y0,
-                            InnerDivision(z0, z1, f000, f001)
-                            ));
-                        count++;
-                    }
-                    if (count < 3 && f000 * f100 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            InnerDivision(x0, x1, f000, f100),
-                            y0,
-                            z0
-                            ));
-                        count++;
-                    }
-                    if (count < 3 && f000 * f010 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            x0,
-                            InnerDivision(y0, y1, f000, f010),
-                            z0
-                            ));
-                        count++;
-                    }
-
-                    if (count < 3 && f001 * f101 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            InnerDivision(x0, x1, f001, f101),
-                            y0,
-                            z1
-                            ));
-                        count++;
-                    }
-                    if (count < 3 && f001 * f011 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            x0,
-                            InnerDivision(y0, y1, f001, f011),
-                            z1
-                            ));
-                        count++;
-                    }
-                    if (count < 3 && f100 * f110 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            x1,
-                            InnerDivision(y0, y1, f100, f110),
-                            z0
-                            ));
-                        count++;
-                    }
-                    if (count < 3 && f100 * f101 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            x1,
-                            y0,
-                            InnerDivision(z0, z1, f100, f101)
-                            ));
-                        count++;
-                    }
-                    if (count < 3 && f010 * f011 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            x0,
-                            y1,
-                            InnerDivision(z0, z1, f010, f011)
-                            ));
-                        count++;
-                    }
-                    if (count < 3 && f010 * f110 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            InnerDivision(x0, x1, f010, f110),
-                            y1,
-                            z0
-                            ));
-                        count++;
-                    }
-
-                    if (count < 3 && f110 * f111 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            x1,
-                            y1,
-                            InnerDivision(z0, z1, f110, f111)
-                            ));
-                        count++;
-                    }
-                    if (count < 3 && f011 * f111 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            InnerDivision(x0, x1, f011, f111),
-                            y1,
-                            z1
-                            ));
-                        count++;
-                    }
-                    if (count < 3 && f101 * f111 < 0f)
-                    {
-                        vertices.Add(new Vector3(
-                            x1,
-                            InnerDivision(y0, y1, f101, f111),
-                            z1
-                            ));
-                        count++;
-                    }
+                    int verticesCount = vertices.Count;
+                    MC.SetF(f000,f001,f010,f011,f100,f101,f110,f111);
+                    MC.SetXYZ(x0,y0,z0,x1,y1,z1);
+                    MC.MarchingCube1();
                     int vCount = vertices.Count - verticesCount;
                     //Debug.Log(vCount);
                     if (vCount >= 3)
                     {
                         Vector3 normal = Vector3.Cross(vertices[verticesCount + 1] - vertices[verticesCount],
-                            vertices[verticesCount + 2] - vertices[verticesCount]);
+                        vertices[verticesCount + 2] - vertices[verticesCount]);
                         Vector3 grad = GradF(vertices[verticesCount]);
-                        if (SurfaceA)
+                        if ((SurfaceA && Vector3.Dot(normal, grad) > 0f) || (!SurfaceA && Vector3.Dot(normal, grad) < 0f))
                         {
-                            if (Vector3.Dot(normal, grad) > 0f)
+                            if (vCount == 3)
                             {
                                 triangles.Add(verticesCount);
                                 triangles.Add(verticesCount + 1);
                                 triangles.Add(verticesCount + 2);
                             }
-                            else
+                            else if (vCount == 4)
                             {
-                                triangles.Add(verticesCount + 2);
-                                triangles.Add(verticesCount + 1);
                                 triangles.Add(verticesCount);
+                                triangles.Add(verticesCount + 1);
+                                triangles.Add(verticesCount + 2);
+                                triangles.Add(verticesCount);
+                                triangles.Add(verticesCount + 2);
+                                triangles.Add(verticesCount + 3);
+                            }
+                            else if (vCount == 5)
+                            {
+                                triangles.Add(verticesCount);
+                                triangles.Add(verticesCount + 1);
+                                triangles.Add(verticesCount + 2);
+                                triangles.Add(verticesCount);
+                                triangles.Add(verticesCount + 2);
+                                triangles.Add(verticesCount + 3);
+                                triangles.Add(verticesCount);
+                                triangles.Add(verticesCount + 3);
+                                triangles.Add(verticesCount + 4);
+                            }
+                            else if (vCount == 6)
+                            {
+                                triangles.Add(verticesCount);
+                                triangles.Add(verticesCount + 1);
+                                triangles.Add(verticesCount + 2);
+                                triangles.Add(verticesCount);
+                                triangles.Add(verticesCount + 2);
+                                triangles.Add(verticesCount + 3);
+                                triangles.Add(verticesCount);
+                                triangles.Add(verticesCount + 3);
+                                triangles.Add(verticesCount + 5);
+                                triangles.Add(verticesCount + 3);
+                                triangles.Add(verticesCount + 4);
+                                triangles.Add(verticesCount + 5);
                             }
                         }
                         else
                         {
-                            if (Vector3.Dot(normal, grad) < 0f)
+                            if (vCount == 3)
                             {
-                                triangles.Add(verticesCount);
-                                triangles.Add(verticesCount + 1);
                                 triangles.Add(verticesCount + 2);
+                                triangles.Add(verticesCount + 1);
+                                triangles.Add(verticesCount);
                             }
-                            else
+                            else if (vCount == 4)
                             {
                                 triangles.Add(verticesCount + 2);
                                 triangles.Add(verticesCount + 1);
                                 triangles.Add(verticesCount);
+                                triangles.Add(verticesCount + 3);
+                                triangles.Add(verticesCount + 2);
+                                triangles.Add(verticesCount);
+                            }
+                            else if (vCount == 5)
+                            {
+                                triangles.Add(verticesCount + 2);
+                                triangles.Add(verticesCount + 1);
+                                triangles.Add(verticesCount);
+                                triangles.Add(verticesCount + 3);
+                                triangles.Add(verticesCount + 2);
+                                triangles.Add(verticesCount);
+                                triangles.Add(verticesCount + 4);
+                                triangles.Add(verticesCount + 3);
+                                triangles.Add(verticesCount);
+                            }
+                            else if (vCount == 6)
+                            {
+                                triangles.Add(verticesCount + 2);
+                                triangles.Add(verticesCount + 1);
+                                triangles.Add(verticesCount);
+                                triangles.Add(verticesCount + 3);
+                                triangles.Add(verticesCount + 2);
+                                triangles.Add(verticesCount);
+                                triangles.Add(verticesCount + 5);
+                                triangles.Add(verticesCount + 3);
+                                triangles.Add(verticesCount);
+                                triangles.Add(verticesCount + 5);
+                                triangles.Add(verticesCount + 4);
+                                triangles.Add(verticesCount + 3);
                             }
                         }
                     }
-
                 }
             }
         }
