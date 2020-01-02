@@ -22,7 +22,7 @@ public class FakeGyroid : MonoBehaviour
 //    public GameObject CameraRig;
 
 
-    public float minX = -1f, maxX = 1f, minY = -1f, maxY = 1f, minZ = -1f, maxZ = 1f; 
+    public float minX = -1f, maxX = 1f, minY = -1f, maxY = 1f, minZ = -1f, maxZ = 1f;
 
     float InnerDivision(float x1, float x2, float rate1, float rate2)
     {
