@@ -1,0 +1,47 @@
+\documentclass[12pt,dvipdfmx]{article}
+\usepackage{mathrsfs}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
+
+\begin{document}
+
+\begin{center}
+
+{\bf \Large Costa's minimal surface}
+
+\end{center}
+
+
+\section{Abstract}
+
+Costa's minimal surface is an embedded minimal surface discovered in 1982 by the Brazilian mathematician Celso Jos\'e da Costa. It is also a surface of finite topology, which means that it can be formed by puncturing a compact surface. Topologically, it is a thrice-punctured torus.
+
+Until its discovery, the plane, helicoid and the catenoid were believed to be the only embedded minimal surfaces that could be formed by puncturing a compact surface. The Costa surface evolves from a torus, which is deformed until the planar end becomes catenoidal. Defining these surfaces on rectangular tori of arbitrary dimensions yields the Costa surface. Its discovery triggered research and discovery into several new surfaces and open conjectures in topology. (from Wikipeida)
+
+
+
+\section{Definition}
+
+As discovered by Gray (Ferguson et al. 1996, Gray 1997), the Costa surface can be represented parametrically explicitly by
+
+\begin{align*}
+x	&=	\dfrac{1}{2}\Re\left\{-\zeta(u+iv)+\pi u+\dfrac{\pi^2}{4e_1}+\dfrac{\pi}{2e_1}[\zeta(u+iv-\frac{1}{2})-\zeta(u+iv-\frac{i}{2})]\right\} \\	
+y	&=	\dfrac{1}{2}\Re\left\{-i\zeta(u+iv)+\pi v+\dfrac{\pi^2}{4e_1}-\dfrac{\pi}{2e_1}[i\zeta(u+iv-\frac{1}{2})-i \zeta(u+iv-\frac{i}{2})]\right \} \\	
+z	&=	\dfrac{1}{4}\sqrt{2\pi} \ln \left|\dfrac{\wp(u+iv)-e_1}{\wp(u+iv)+e_1}\right|,	
+\end{align*}
+where $\zeta(z)$ is the Weierstrass zeta function, $\wp(g_2,g_3;z)$ is the Weierstrass elliptic function with $(g_2,g_3)=(189.072772\cdots, 0)$, the invariants correspond to the half-periods $\frac{1}{2}$ and $\frac{i}{2}$, and first root
+\[
+ e_1=\wp\left(\frac{1}{2}; 0, g_3\right)=\wp\left(\frac{1}{2} | \frac{1}{2}, \frac{i}{2}\right) \approx 6.87519,
+\]
+ where $\wp(z;g_2,g_3)=\wp(z|\omega_1,\omega_2)$ is the Weierstrass elliptic function.
+
+
+\begin{thebibliography}{9}
+
+\bibitem{Mathworld} MathWorld bt Wolfram, \verb|http://mathworld.wolfram.com/CostaMinimalSurface.html|
+
+\end{thebibliography}
+
+
+\end{document}

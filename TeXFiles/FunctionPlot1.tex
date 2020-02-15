@@ -1,0 +1,30 @@
+\documentclass[12pt,dvipdfmx]{article}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+
+\begin{document}
+
+\begin{center}
+
+{\bf \Large Graph $z=\dfrac{xy}{x^2+y^2}$}
+
+\end{center}
+
+
+\section{Abstract}
+
+The function $z=f(x,y)=\dfrac{xy}{x^2+y^2}$ is a famous example such that it is not continuous at the origin. If we consider a line $x=0$ then the limit is 
+\[
+\lim_{x\to 0}f(x,0) = \lim_{x\to 0}\dfrac{x\cdot 0}{x^2+0^2} = 0,
+\]
+but if we consider the limit along a line $y=x$ then
+\[
+\lim_{x\to 0}f(x,x) = \lim_{x\to 0}\dfrac{x^2}{x^2+x^2} = \dfrac{1}{2}.
+\]
+
+At $(0,0,\pm \frac{1}{2})$, there occur Whitney's umbrellas.
+
+
+\end{document}

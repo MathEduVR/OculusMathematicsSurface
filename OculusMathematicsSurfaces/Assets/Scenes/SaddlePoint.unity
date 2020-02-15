@@ -792,6 +792,7 @@ MonoBehaviour:
   DivT: 0
   MyMesh: {fileID: 0}
   GraphA: 1
+  change: 0
   GraphNumber: 3
   CameraRig: {fileID: 1589704031}
   eyeHeight: {x: 0, y: 1, z: 0}
@@ -1170,7 +1171,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 615cffe7dc407b942a116739c074d203, type: 2}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1938,6 +1939,7 @@ MonoBehaviour:
   DivT: 0
   MyMesh: {fileID: 0}
   GraphA: 0
+  change: 0
   GraphNumber: 3
   CameraRig: {fileID: 1589704031}
   eyeHeight: {x: 0, y: 1, z: 0}
