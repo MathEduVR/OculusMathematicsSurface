@@ -2,9 +2,9 @@ using System;
 using Oculus.Avatar;
 using UnityEngine;
 
-public class OvrAvatarAssetTexture : OvrAvatarAsset {
+public class OvrAvatarAssetTexture : OvrAvatarAsset
+{
     public Texture2D texture;
-
     private const int ASTCHeaderSize = 16;
 
     public OvrAvatarAssetTexture(UInt64 _assetId, IntPtr asset) {
@@ -15,11 +15,11 @@ public class OvrAvatarAssetTexture : OvrAvatarAsset {
         int textureDataSize = (int)textureAssetData.textureDataSize;
 
         AvatarLogger.Log(
-            "OvrAvatarAssetTexture - " 
-            + _assetId 
-            + ": " 
+            "OvrAvatarAssetTexture - "
+            + _assetId
+            + ": "
             + textureAssetData.format.ToString()
-            + " "  
+            + " "
             + textureAssetData.sizeX
             + "x"
             + textureAssetData.sizeY);
@@ -36,12 +36,20 @@ public class OvrAvatarAssetTexture : OvrAvatarAsset {
                 format = TextureFormat.DXT5;
                 break;
             case ovrAvatarTextureFormat.ASTC_RGB_6x6:
+#if UNITY_2020_1_OR_NEWER
+                format = TextureFormat.ASTC_6x6;
+#else
                 format = TextureFormat.ASTC_RGB_6x6;
+#endif
                 textureData = new IntPtr(textureData.ToInt64() + ASTCHeaderSize);
                 textureDataSize -= ASTCHeaderSize;
                 break;
             case ovrAvatarTextureFormat.ASTC_RGB_6x6_MIPMAPS:
+#if UNITY_2020_1_OR_NEWER
+                format = TextureFormat.ASTC_6x6;
+#else
                 format = TextureFormat.ASTC_RGB_6x6;
+#endif
                 break;
             default:
                 throw new NotImplementedException(
@@ -51,7 +59,11 @@ public class OvrAvatarAssetTexture : OvrAvatarAsset {
         texture = new Texture2D(
             (int)textureAssetData.sizeX, (int)textureAssetData.sizeY,
             format, textureAssetData.mipCount > 1,
-            QualitySettings.activeColorSpace == ColorSpace.Gamma ? false : true);
+            QualitySettings.activeColorSpace == ColorSpace.Gamma ? false : true)
+        {
+            filterMode = FilterMode.Trilinear,
+            anisoLevel = 4,
+        };
         texture.LoadRawTextureData(textureData, textureDataSize);
         texture.Apply(true, false);
     }

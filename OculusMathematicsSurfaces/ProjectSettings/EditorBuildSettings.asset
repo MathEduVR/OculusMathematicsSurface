@@ -68,4 +68,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CostaMinimalSurface.unity
     guid: dd7e6d632bdb3c24782549e1cfbc28d8
-  m_configObjects: {}
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: fea81c1eb6f76934397a0303f54b92c5,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 71f57a8efa02d084f9b697504cfe289b,
+      type: 2}

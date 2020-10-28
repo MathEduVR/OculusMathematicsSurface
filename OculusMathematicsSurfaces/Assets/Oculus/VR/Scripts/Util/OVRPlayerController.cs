@@ -1,10 +1,10 @@
 /************************************************************************************
 Copyright : Copyright (c) Facebook Technologies, LLC and its affiliates. All rights reserved.
 
-Licensed under the Oculus Utilities SDK License Version 1.31 (the "License"); you may not use
+Licensed under the Oculus Master SDK License Version 1.0 (the "License"); you may not use
 the Utilities SDK except in compliance with the License, which is provided at the time of installation
 or download, or which otherwise accompanies this software in either electronic or hard copy form.
-You may obtain a copy of the License at https://developer.oculus.com/licenses/utilities-1.31
+You may obtain a copy of the License at https://developer.oculus.com/licenses/oculusmastersdk-1.0/
 
 Unless required by applicable law or agreed to in writing, the Utilities SDK distributed
 under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
@@ -49,13 +49,12 @@ public class OVRPlayerController : MonoBehaviour
 	/// <summary>
 	/// The rate of rotation when using the keyboard.
 	/// </summary>
-	public float RotationRatchet = 30.0f;
-    float RotationV = 0.0f;
+	public float RotationRatchet = 45.0f;
 
-    /// <summary>
-    /// The player will rotate in fixed steps if Snap Rotation is enabled.
-    /// </summary>
-    [Tooltip("The player will rotate in fixed steps if Snap Rotation is enabled.")]
+	/// <summary>
+	/// The player will rotate in fixed steps if Snap Rotation is enabled.
+	/// </summary>
+	[Tooltip("The player will rotate in fixed steps if Snap Rotation is enabled.")]
 	public bool SnapRotation = true;
 
 	/// <summary>
@@ -90,13 +89,12 @@ public class OVRPlayerController : MonoBehaviour
 	/// </summary>
 	[NonSerialized]
 	public float CameraHeight;
-    public Vector3 eyeHeight = Vector3.up;
 
-    /// <summary>
-    /// This event is raised after the character controller is moved. This is used by the OVRAvatarLocomotion script to keep the avatar transform synchronized
-    /// with the OVRPlayerController.
-    /// </summary>
-    public event Action<Transform> TransformUpdated;
+	/// <summary>
+	/// This event is raised after the character controller is moved. This is used by the OVRAvatarLocomotion script to keep the avatar transform synchronized
+	/// with the OVRPlayerController.
+	/// </summary>
+	public event Action<Transform> TransformUpdated;
 
 	/// <summary>
 	/// This bool is set to true whenever the player controller has been teleported. It is reset after every frame. Some systems, such as
@@ -151,6 +149,7 @@ public class OVRPlayerController : MonoBehaviour
 	private float SimulationRate = 60f;
 	private float buttonRotation = 0f;
 	private bool ReadyToSnapTurn; // Set to true when a snap turn has occurred, code requires one frame of centered thumbstick to enable another snap turn.
+	private bool playerControllerEnabled = false;
 
 	void Start()
 	{
@@ -183,26 +182,39 @@ public class OVRPlayerController : MonoBehaviour
 
 	void OnEnable()
 	{
-		OVRManager.display.RecenteredPose += ResetOrientation;
-
-		if (CameraRig != null)
-		{
-			CameraRig.UpdatedAnchors += UpdateTransform;
-		}
 	}
 
 	void OnDisable()
 	{
-		OVRManager.display.RecenteredPose -= ResetOrientation;
-
-		if (CameraRig != null)
+		if (playerControllerEnabled)
 		{
-			CameraRig.UpdatedAnchors -= UpdateTransform;
+			OVRManager.display.RecenteredPose -= ResetOrientation;
+
+			if (CameraRig != null)
+			{
+				CameraRig.UpdatedAnchors -= UpdateTransform;
+			}
+			playerControllerEnabled = false;
 		}
 	}
 
 	void Update()
 	{
+		if (!playerControllerEnabled)
+		{
+			if (OVRManager.OVRManagerinitialized)
+			{
+				OVRManager.display.RecenteredPose += ResetOrientation;
+
+				if (CameraRig != null)
+				{
+					CameraRig.UpdatedAnchors += UpdateTransform;
+				}
+				playerControllerEnabled = true;
+			}
+			else
+				return;
+		}
 		//Use keys to ratchet rotation
 		if (Input.GetKeyDown(KeyCode.Q))
 			buttonRotation -= RotationRatchet;
@@ -246,19 +258,8 @@ public class OVRPlayerController : MonoBehaviour
 		}
 
 		CameraHeight = CameraRig.centerEyeAnchor.localPosition.y;
-        if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickUp) && OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger))
-        {
-            eyeHeight.y += 0.02f;
-            CameraRig.transform.localPosition = eyeHeight;
-        }
-        else if (OVRInput.Get(OVRInput.Button.PrimaryThumbstickDown) && OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger))
-        {
-            eyeHeight.y -= 0.02f;
-            if (eyeHeight.y < 0.2f) eyeHeight.y = 0.2f;
-            CameraRig.transform.localPosition = eyeHeight;
-        }
 
-        if (CameraUpdated != null)
+		if (CameraUpdated != null)
 		{
 			CameraUpdated();
 		}
@@ -318,10 +319,10 @@ public class OVRPlayerController : MonoBehaviour
 
 		if (EnableLinearMovement)
 		{
-            bool moveForward = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) || OVRInput.Get(OVRInput.Button.SecondaryThumbstickUp) ;
+			bool moveForward = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
 			bool moveLeft = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
 			bool moveRight = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
-			bool moveBack = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow) || OVRInput.Get(OVRInput.Button.SecondaryThumbstickDown);
+			bool moveBack = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
 
 			bool dpad_move = false;
 
@@ -380,8 +381,6 @@ public class OVRPlayerController : MonoBehaviour
 #endif
 
 			Vector2 primaryAxis = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
-            if (OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger) || OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger))
-                primaryAxis = Vector2.zero;
 
 			// If speed quantization is enabled, adjust the input to the number of fixed speed steps.
 			if (FixedSpeedSteps > 0)
@@ -436,45 +435,27 @@ public class OVRPlayerController : MonoBehaviour
 
 			if (SnapRotation)
 			{
-				if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickLeft))
+				if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickLeft) ||
+					(RotationEitherThumbstick && OVRInput.Get(OVRInput.Button.PrimaryThumbstickLeft)))
 				{
 					if (ReadyToSnapTurn)
 					{
-                        RotationV -= .05f;
-                        if (RotationV < -0.3f) RotationV = -0.3f;
-                        euler.y += RotationV;
-                        //euler.y -= RotationRatchet;
-						//ReadyToSnapTurn = false;
+						euler.y -= RotationRatchet;
+						ReadyToSnapTurn = false;
 					}
 				}
-				else if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickRight))
+				else if (OVRInput.Get(OVRInput.Button.SecondaryThumbstickRight) ||
+					(RotationEitherThumbstick && OVRInput.Get(OVRInput.Button.PrimaryThumbstickRight)))
 				{
 					if (ReadyToSnapTurn)
 					{
-                        RotationV += .05f;
-                        if (RotationV > 0.3f) RotationV = 0.3f;
-                        euler.y += RotationV;
-                        //euler.y += RotationRatchet;
-                        //ReadyToSnapTurn = false;
-                    }
-                }
+						euler.y += RotationRatchet;
+						ReadyToSnapTurn = false;
+					}
+				}
 				else
 				{
-                    if (RotationV < -0.02f)
-                    {
-                        RotationV += 0.025f;
-                        euler.y += RotationV;
-                    }
-                    else if (RotationV > 0.02f)
-                    {
-                        RotationV -= 0.025f;
-                        euler.y += RotationV;
-                    }
-                    else
-                    {
-                        RotationV = 0f;
-                    }
-                    ReadyToSnapTurn = true;
+					ReadyToSnapTurn = true;
 				}
 			}
 			else
