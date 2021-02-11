@@ -11,3 +11,6 @@ Bour minimal surface, boy surface, Catalan's minimal surface, Catenoid, Clebsch 
 
 コンテンツを追加してくれる人を緩く募集しています。2021年1月段階では、明治大学先端メディアサイエンス学科の阿原(aharalabMeiji)が管理しておりますが、本腰を入れて整備していただける方に管理人を譲りたいと日々思っています。
 
+## TODO リスト
+
+[バグ残りのリスト](https://github.com/MathEduVR/OculusMathematicsSurface/wiki/%E3%83%90%E3%82%B0%E3%81%AA%E3%81%A9)
